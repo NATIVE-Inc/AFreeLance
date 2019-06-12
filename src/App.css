@@ -1,0 +1,311 @@
+.top {
+  position: relative;
+  background-color: #ffffff;
+  height: 30px;
+  overflow: hidden;
+  z-index: 1;
+}
+.holder {
+  -moz-box-align: stretch;
+  flex: 1 1 0%;
+  display: flex;
+  align-items: stretch;
+  transition: margin-bottom 200ms ease 0s;
+}
+.sidenav {
+  -moz-box-align: stretch;
+  -moz-box-direction: normal;
+  -moz-box-orient: vertical;
+  z-index: 15;
+  flex: 0 0 auto;
+  background: rgb(245, 247, 249) none repeat scroll 0% 0%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 250px;
+  padding-left: calc(50% - 724px);
+  border-right: 1px solid rgb(230, 236, 241);
+  /*align-items: center;*/
+}
+.content {
+  -moz-box-direction: normal;
+  -moz-box-orient: vertical;
+  margin: 0px;
+  padding: 0px 0px 64px;
+  flex: 1 1 auto;
+  min-width: 0px;
+  display: flex;
+  flex-direction: column;
+  background: rgb(255, 255, 255) none repeat scroll 0% 0%;
+  max-width: 100%;
+  overflow-y: scroll;
+}
+
+.sb_link {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  flex: 1 1 0%;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  outline: medium none currentcolor;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 16px;
+  line-height: 1.625;
+  font-weight: 400;
+  font-family: Roboto;
+  color: gray;
+}
+
+.active {
+  color: black;
+  text-decoration: underline;
+}
+
+ul {
+  padding: 20px 0;
+  margin: 0;
+  list-style: none;
+  padding-left: 25%;
+}
+
+.powered_by {
+  color: rgb(157, 170, 182);
+  background-color: rgb(230, 236, 241);
+  display: -ms-flexbox !important;
+  display: flex !important;
+  border-radius: 3px;
+  -ms-flex-align: center;
+  align-items: center;
+  margin: auto 16px 16px 16px;
+  font-size: 0.8em;
+  text-align: center;
+  position: inherit;
+  padding: 5px 10px;
+  text-align: left;
+}
+
+html {
+  height: 100%;
+}
+
+body, #root, .holder, .sidenav {
+  height: inherit;
+}
+
+/* dropdown menus */
+
+
+.dropdown-content {
+    display: block;
+    position: absolute;
+    min-width: 160px;
+    padding: 2px 25px;
+}
+
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+
+
+
+img {
+  width: 30%;
+}
+.slogan {
+  font-size: 10px;
+  margin: 0;
+}
+.landing {
+  position: relative;
+  background: url('./components/images/showcase.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.landing-inner {
+  padding-top: 80px;
+}
+
+.dark-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.card-form {
+  opacity: 0.9;
+}
+
+.latest-profiles-img {
+  width: 40px;
+  height: 40px;
+}
+
+.form-control::placeholder {
+  color: #bbb !important;
+}
+
+
+
+/*CSS for cards*/
+header .navbar.navbar-light .navbar-brand {
+
+    padding: 0px;
+
+}
+.white-bg2 {
+
+    background: green;
+    background: linear-gradient(to right,rgb(28, 202, 162) 0%,rgb(49, 209, 129) 100%);
+
+}
+
+.purple-bg {
+    background: none;
+}
+
+/*send cards to the top*/
+.align-self-center {
+
+    -ms-flex-item-align: center !important;
+    align-self: normal !important;
+
+}
+
+.inner-box {
+
+    height: 650px !important;
+
+}
+
+.space-btm {
+    padding-bottom: 10px;
+}
+
+h5 {
+
+    font-size: 14px !important;
+    font-style: normal;
+
+}
+
+.skill-iq-blog-meta {
+
+    margin: 2px 3px;
+    font-size: 10px;
+    opacity: 0.4;
+
+}
+
+.iq-blog-detail {
+    text-align: left;
+}
+
+.skill-list {
+  margin: 0;
+  padding: 0;
+}
+.skill-list a {
+  margin: 0;
+font-size: 10px;
+opacity: 0.4;
+padding: 0;
+color: black;
+text-decoration: none;
+}
+
+.blog-content {
+
+    font-size: 13px;
+    line-height: normal;
+
+}
+
+.blog-button {
+
+    display: inline-block;
+    width: 100%;
+    border-top: 1px solid #ededed;
+    padding: 4px 0 0;
+    font-size: 10px;
+
+}
+
+.iq-blog-detail {
+
+    padding: 10px 10px 1px;
+    border: 1px solid #ededed;
+        border-top-color: rgb(237, 237, 237);
+        border-top-style: solid;
+        border-top-width: 1px;
+    border-top: 0;
+
+}
+
+select.form-control{
+
+    height: calc(1.75rem + 2px) !important;
+    font-size: 0.6rem;
+    font-family: roboto;
+
+}
+
+.space-btm {
+    padding-bottom: 10px;
+    float: left;
+}
+
+.img-fluid {
+  width: 100%;
+}
+
+
+.theForm {
+  width: 35%;
+  margin: auto;
+  text-align: left;
+}
+
+.formField {
+  margin: 0;
+}
+
+.form-row {
+  margin-top: 10px;
+}
+
+.display-3 {
+  font-size: 3.4rem !important;
+}
+
+.paddingClr {
+  padding: 0 !important;
+}
+
+.card-block {
+  text-align: left;
+  padding: 0.8rem;
+}
+
+.skills-btn .active {
+    background-color: #007bff;
+    transition: 1s ease-in-out;
+    border: 1px solid white;
+}
+
+.card {
+  width: 19%;
+  float: left;
+  margin-right: 1%;
+  margin-top: 3%;
+}
