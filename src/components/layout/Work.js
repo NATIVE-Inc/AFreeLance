@@ -23,6 +23,15 @@ class Work extends Component {
     })
   };
 
+  getDetails(event){
+    let currentId = event.currentTarget.id;
+    this.props.history.push({
+      pathname: '/details', 
+      search: '?job',
+      state: {id: currentId}
+    })
+  }
+
   componentDidMount(){
    this.klikGet()
   }
@@ -30,7 +39,7 @@ class Work extends Component {
   render() {
     const dataMySQL = this.state.work.map((item, index)=>{
       return (
-                <div className="card">
+                <div className="card" id={item.id} onClick={this.getDetails.bind(this)}>
                   <img className="card-img-top img-fluid" src={require(`../${item.img}`)}  alt="the_image"/>
                   <div className="card-block">
                     <h4 className="card-title paddingClr">{item.title}</h4>
@@ -41,32 +50,30 @@ class Work extends Component {
     })
     return (
             <div className="container">
-              <div className="row">
-                      <p> Filters </p>
-                <div className="col-md-12 text-center">
+              <label> Filters </label>
+              <div className="col-md-12 text-center">
+                <div className="row">
                   <div className="form-group col-md-2">
-                    <div className="form-group">
-                      <fieldset class="form-group">
-                        <select class="form-control">
-                          <option selected>Category</option>
-                          <option>two</option>
-                          <option>three</option>
-                          <option>four</option>
-                          <option>five</option>
-                        </select>
-                      </fieldset>
-                      <fieldset class="form-group">
-                        <select class="form-control">
-                          <option selected> Area </option>
-                          <option>two</option>
-                          <option>three</option>
-                          <option>four</option>
-                          <option>five</option>
-                        </select>
-                      </fieldset>
-                    </div>
+                    <fieldset class="form-group">
+                      <select class="form-control">
+                        <option selected>Category</option>
+                        <option>two</option>
+                        <option>three</option>
+                        <option>four</option>
+                        <option>five</option>
+                      </select>
+                    </fieldset>
+                    <fieldset class="form-group">
+                      <select class="form-control">
+                        <option selected> Area </option>
+                        <option>two</option>
+                        <option>three</option>
+                        <option>four</option>
+                        <option>five</option>
+                      </select>
+                    </fieldset>
                   </div>
-                  <div className="form-group col-md-10">
+                  <div className="form-group col-sm-6 col-md-10">
                       { dataMySQL }
                   </div>
                 </div>

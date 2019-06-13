@@ -10,8 +10,7 @@ import Work from './components/layout/Work';
 import Login from './components/layout/Login';
 import SignUp from './components/layout/SignUp';
 import PostJob from './components/layout/PostJob';
-import CreateTodo from './components/layout/CreateTodo';
-import TodosList from './components/layout/viewTodo';
+import Details from './components/layout/details';
 
 import './App.css';
 
@@ -62,8 +61,7 @@ class App extends Component {
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUp}/>
         <Route path="/postjob" component={PostJob}/>
-        <Route path="/create" component={CreateTodo}/>
-        <Route path="/view" component={TodosList}/>
+        <Route path="/details" component={Details}/>
         <Footer />
       </div>
     </HashRouter>

@@ -33,12 +33,8 @@ class SignUp extends Component {
       password: this.state.password
     })
     .then((res) => {
-      {res.data? 
-        this.props.history.push('/') 
-        : 
-        this.setState({
-          warning: "Account not created",
-        }) 
+      {res.data? this.props.history.push('/'): 
+        this.setState({ warning: "Account not created" }) 
       }
     })
   };
@@ -50,8 +46,8 @@ class SignUp extends Component {
                 <h1 className="display-3 mb-4">Sign Up</h1>
                 <form ref="myForm" className="theForm" onSubmit={this.handleSubmit.bind(this)}> 
                     <div className="form-group">
-                        <div class="row">
-                          <div class="col">
+                        <div className="row">
+                          <div className="col">
                             <label name="first_name" for="exampleFormControlInput1">First name</label>
                             <input type="text" className="form-control"  onChange={this.handleChange.bind(this)}placeholder="John" required/>
                           </div>
