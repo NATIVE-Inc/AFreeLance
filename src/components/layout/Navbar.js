@@ -14,13 +14,14 @@ class Navbar extends Component {
     }
 
     logout(){
-        Cookies.remove('user');
+        Cookies.remove('first_name');
+        Cookies.remove('last_name');
+        Cookies.remove('email');
         this.forceUpdate();
       }
 
   render() {
-      const user = Cookies.get('user')
-      console.log(Cookies.get('first_name'))
+      const user = Cookies.get('first_name')
       if (user === undefined){
         return (
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -99,7 +100,7 @@ class Navbar extends Component {
                       </li>
                       <li className="nav-item">
                         <a className="nav-link btn btn-primary" onClick={this.logout.bind(this)}>
-                          {Cookies.get('user')}
+                          {user}
                         </a>
                       </li>
                     </ul>

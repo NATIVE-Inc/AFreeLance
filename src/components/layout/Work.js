@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Work extends Component {
   constructor() {
@@ -25,11 +26,8 @@ class Work extends Component {
 
   getDetails(event){
     let currentId = event.currentTarget.id;
-    this.props.history.push({
-      pathname: '/details', 
-      search: '?job',
-      state: {id: currentId}
-    })
+    Cookies.set('workId', currentId)
+    this.props.history.push('/details')
   }
 
   componentDidMount(){

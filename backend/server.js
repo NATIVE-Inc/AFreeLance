@@ -50,9 +50,8 @@ app.post('/data/id', function(req,res){
     var sql = 'SELECT * FROM work WHERE id = "' + dataId + '"';
     db.query(sql, (err, result)=>{
         if(err) throw err;
-        var data = result[0]
         console.log('sending id data')
-        res.send(data); // sending the result back 
+        res.send(result); // sending the result back 
     });
 });
  
@@ -110,7 +109,6 @@ app.post('/oAuth/login', function(req, res){
         if(err) throw err;
         if(result.length !== 0){
             console.log('login confirmed')
-            console.log(result)
             res.send(result)
         }
         else{

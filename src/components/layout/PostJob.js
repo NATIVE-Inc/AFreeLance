@@ -14,8 +14,7 @@ class PostJob extends Component {
         skillList: [],
         author: '',
         location: '',
-        result: [],
-        user: Cookies.get('user')
+        result: []
       };
       this.handleChange = this.handleChange.bind(this);
     }
