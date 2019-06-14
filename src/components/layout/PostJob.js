@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DatePicker from "react-datepicker";
 import axios from 'axios';
-import {reactLocalStorage} from 'reactjs-localstorage';
+import Cookies from 'js-cookie';
 
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,7 +14,8 @@ class PostJob extends Component {
         skillList: [],
         author: '',
         location: '',
-        result: []
+        result: [],
+        user: Cookies.get('user')
       };
       this.handleChange = this.handleChange.bind(this);
     }
@@ -56,15 +57,12 @@ class PostJob extends Component {
   };
 
   componentDidMount() {
-    if(reactLocalStorage.get('login') === "false"){
+    if(Cookies.get('first_name') === undefined){
       this.props.history.push('/login')
     }
     else{
-      console.log("crazy")
-
     }
   }
-
   render() {
     return (
           <div className="container">

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import {reactLocalStorage} from 'reactjs-localstorage';
+import Cookies from 'js-cookie'
 
 class Login extends Component {
 
@@ -30,8 +30,10 @@ class Login extends Component {
     })
     .then((res) => {
       if(res.data){
-        reactLocalStorage.set('login', true);
-        reactLocalStorage.set('user', this.state.email);
+        Cookies.set('user', this.state.email);
+        Cookies.set('first_name', res.data[0]["first_name"]);
+        Cookies.set('last_name', res.data[0]["last_name"]);
+        Cookies.set('email', res.data[0]["email"]);
         this.props.history.push('/');
       }
       else{
@@ -41,7 +43,6 @@ class Login extends Component {
       }
     });
   };
-
 
   render() {
     return (

@@ -109,8 +109,9 @@ app.post('/oAuth/login', function(req, res){
     db.query(sql, (err, result)=> {
         if(err) throw err;
         if(result.length !== 0){
-            console.log('user exist')
-            res.send(true)
+            console.log('login confirmed')
+            console.log(result)
+            res.send(result)
         }
         else{
             console.log('no user exist')

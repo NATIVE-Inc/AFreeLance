@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {reactLocalStorage} from 'reactjs-localstorage';
 
 class Landing extends Component {
 
-  logout(){
-    reactLocalStorage.set('login', false);
-    reactLocalStorage.set('user', null);
+  componentDidUpdate(){
+    this.forceUpdate();
   }
 
   render() {
@@ -28,7 +26,6 @@ class Landing extends Component {
                   Hire
                 </a>
               </div>
-              <button onClick={this.logout.bind(this)} className="btn btn-primary">{reactLocalStorage.get('login')}</button>
             </div>
           </div>
         </div>
