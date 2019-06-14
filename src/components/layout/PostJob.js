@@ -82,11 +82,15 @@ class PostJob extends Component {
                       <div className="row">
                         <div className="col">
                           <label>Deadline</label>
-                          <DatePicker
-                              selected={this.state.startDate}
-                              onChange={this.handleChange}
-                              ref={ deadline => this.deadline = deadline }
-                          />
+                          <fieldset class="form-group">
+                          <select class="form-control dropdown-menu">
+                            <option selected default> Category </option>
+                            <option>two</option>
+                            <option>three</option>
+                            <option>four</option>
+                            <option>five</option>
+                          </select>
+                        </fieldset>
                         </div>
                         <div className="col">
                           <label>Amount</label>

@@ -56,7 +56,8 @@ app.post('/data/id', function(req,res){
 });
  
 app.post('/addJob', function(req, res){
-    const today = new Date();
+    const uploadDate = new Date().getDate();
+    const uploadTime = new Date.now();
     const jobData = {
         title: req.body.title,
         description: req.body.descr, 

@@ -54,7 +54,7 @@ class Work extends Component {
                   <div className="form-group col-md-2">
                     <fieldset class="form-group">
                       <select class="form-control">
-                        <option selected>Category</option>
+                        <option selected default>Category</option>
                         <option>two</option>
                         <option>three</option>
                         <option>four</option>
@@ -63,7 +63,7 @@ class Work extends Component {
                     </fieldset>
                     <fieldset class="form-group">
                       <select class="form-control">
-                        <option selected> Area </option>
+                        <option selected default> Area </option>
                         <option>two</option>
                         <option>three</option>
                         <option>four</option>

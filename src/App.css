@@ -367,5 +367,20 @@ input#search-bar{
   right: -45px;
 }
 
+/* details page  */
+.details-title {
+  padding: 2vh;
+  font-size: 3em;
+  font-family: arial;
+  font-weight: bold;
+}
 
+.details-description {
+  padding: 3vh;
+  font-size: 1.5em;
+  background: #dcdcdc30;
+}
 
+.apply {
+  float: right;
+}
