@@ -9,3 +9,5 @@
 - [] hire page 
 - [] page transitions
 - [] ajax verifications
+- [] protect routes with authentication 
+

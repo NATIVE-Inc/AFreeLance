@@ -7,22 +7,43 @@ class Work extends Component {
       super();
       this.state = {
         work: [],
+        categories: 'uncategorized',
+        location: 'uncategorized'
       };
   }
-
-  klikGet(){
-    var url = 'http://127.0.0.1:3210/data';
+  
+  filterJobs(){
+    var url = 'http://127.0.0.1:3210/data/filter';
     axios.post(url, {
-      location: "hello",
-      categories: "world"
+      location: this.refs.location.value,
+      categories: this.refs.categories.value
     })
-    .then((ambilData) => {
-      console.log(ambilData.data);
+    .then((res) => {
       this.setState({
-        work: ambilData.data,
+        work: res.data,
       }) 
     })
   };
+
+  handleChange(e){
+    const name = e.target.ref;
+    const value = e.target.value;
+    this.setState({
+      [name]: value
+    })
+    this.filterJobs()
+  }
+
+  getJobs(){
+    var url = 'http://127.0.0.1:3210/data';
+    axios.post(url)
+    .then((res) => {
+      this.setState({
+        work: res.data,
+      }) 
+    })
+  };
+
 
   getDetails(event){
     let currentId = event.currentTarget.id;
@@ -31,7 +52,7 @@ class Work extends Component {
   }
 
   componentDidMount(){
-   this.klikGet()
+   this.getJobs()
   }
 
   render() {
@@ -52,22 +73,20 @@ class Work extends Component {
               <div className="col-md-12 text-center">
                 <div className="row">
                   <div className="form-group col-md-2">
-                    <fieldset class="form-group">
-                      <select class="form-control">
-                        <option selected default>Category</option>
-                        <option>two</option>
-                        <option>three</option>
-                        <option>four</option>
-                        <option>five</option>
+                    <fieldset className="form-group">
+                      <select className="form-control"  ref="categories" onChange={this.handleChange.bind(this)}>
+                        <option value='uncategorized'>Category</option>
+                        <option>Agriculture</option>
+                        <option>Information Technology</option>
+                        <option>Real Estate</option>
                       </select>
                     </fieldset>
-                    <fieldset class="form-group">
-                      <select class="form-control">
-                        <option selected default> Area </option>
-                        <option>two</option>
-                        <option>three</option>
-                        <option>four</option>
-                        <option>five</option>
+                    <fieldset className="form-group">
+                      <select className="form-control"  ref="location" onChange={this.handleChange.bind(this)}>
+                        <option value='uncategorized'> Area </option>
+                        <option>Yaounde</option>
+                        <option>Douala</option>
+                        <option>Buea</option>
                       </select>
                     </fieldset>
                   </div>

@@ -27,25 +27,25 @@ klikGet(e){
   render() {
     const dataMySQL = this.state.dataku.map((item, index)=>{
       return (
-              <div class="col-md-6 col-lg-3 space-btm">
-                <div class="iq-blog-box">
-                    <div class="iq-blog-image clearfix">
-                        <img class="img-fluid" src={require(`../${item.img}`)} alt="https://www.google.com"/>
+              <div className="col-md-6 col-lg-3 space-btm">
+                <div className="iq-blog-box">
+                    <div className="iq-blog-image clearfix">
+                        <img className="img-fluid" src={require(`../${item.img}`)} alt="https://www.google.com"/>
                     </div>
-                    <div class="iq-blog-detail">
-                        <div class="blog-title"> <a href="blog-single.html"><h5 class="iq-tw-6"> {item.title}  </h5> </a> </div>
-                        <div class="skill-iq-blog-meta">
-                            <ul class="skill-list">
-                                <li class="list-inline-item"><a href="https://www.google.com"><i class="fa fa-calendar" aria-hidden="true"></i> {item.up_date}  </a></li>
-                                <li class="list-inline-item"><a href="https://www.google.com"><i class="fa fa-comment-o" aria-hidden="true"></i> 5</a></li>
+                    <div className="iq-blog-detail">
+                        <div className="blog-title"> <a href="blog-single.html"><h5 className="iq-tw-6"> {item.title}  </h5> </a> </div>
+                        <div className="skill-iq-blog-meta">
+                            <ul className="skill-list">
+                                <li className="list-inline-item"><a href="https://www.google.com"><i className="fa fa-calendar" aria-hidden="true"></i> {item.up_date}  </a></li>
+                                <li className="list-inline-item"><a href="https://www.google.com"><i className="fa fa-comment-o" aria-hidden="true"></i> 5</a></li>
                             </ul>
                         </div>
-                        <div class="blog-content">
+                        <div className="blog-content">
                             <p> {item.description}  </p>
                         </div>
-                        <div class="blog-button">
-                            <a href="https://www.google.com" class="pull-left iq-tw-6 iq-user"><i class="fa fa-user-circle" aria-hidden="true"></i> {item.author}  </a>
-                            <a href="https://www.google.com" class="pull-right iq-tw-6">Read More <i class="fa fa-angle-right" aria-hidden="true"></i></a> </div>
+                        <div className="blog-button">
+                            <a href="https://www.google.com" className="pull-left iq-tw-6 iq-user"><i className="fa fa-user-circle" aria-hidden="true"></i> {item.author}  </a>
+                            <a href="https://www.google.com" className="pull-right iq-tw-6">Read More <i className="fa fa-angle-right" aria-hidden="true"></i></a> </div>
                         </div>
                     </div>
                 </div>
@@ -64,7 +64,7 @@ klikGet(e){
                                 <div className="course_filters">
                                     <br/><br/><div className="blog-title"> <a href="blog-single.html"><h5 className="iq-tw-6">Filter by</h5> </a> </div>
                                     <div className="col-md-12">
-                                        <label for="exampleSelect1">Location</label>
+                                        <label htmlFor="exampleSelect1">Location</label>
                                         <select className="form-control" id="location" name="other" onChange={this.klikGet.bind(this)} ref={ inLocation => this.inputLocation = inLocation }>
                                             <option value="All">All Locations</option>
                                             <option value="Yaounde">Yaounde</option>
@@ -72,7 +72,7 @@ klikGet(e){
                                         </select>
                                     </div>
                                     <div className="col-md-12">
-                                        <label for="exampleSelect1">Categories</label>
+                                        <label htmlFor="exampleSelect1">Categories</label>
                                         <select className="form-control" id="categories" name="categories" onChange={this.klikGet.bind(this)} ref={ incategories => this.inputcategories = incategories }>
                                             <option value="All">All Categories</option>
                                             <option value="Agriculture">Agriculture</option>
@@ -80,7 +80,7 @@ klikGet(e){
                                         </select>
                                     </div>
                                     <div className="col-md-12">
-                                        <label for="exampleSelect1">Posted on</label>
+                                        <label htmlFor="exampleSelect1">Posted on</label>
                                         <button className="btn btn-success" style={{margin:'15px',width:'100px'}} onClick={this.klikGet.bind(this)}>FETCH</button>
                                     </div>
                                 </div>

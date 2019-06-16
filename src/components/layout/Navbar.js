@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { createHashHistory } from 'history';
 import Cookies from 'js-cookie';
+export const history = createHashHistory()
 
 class Navbar extends Component {
     
@@ -17,6 +19,7 @@ class Navbar extends Component {
         Cookies.remove('first_name');
         Cookies.remove('last_name');
         Cookies.remove('email');
+        history.push('/')
         this.forceUpdate();
       }
 
@@ -100,7 +103,7 @@ class Navbar extends Component {
                       </li>
                       <li className="nav-item">
                         <a className="nav-link btn btn-primary" onClick={this.logout.bind(this)}>
-                          {user}
+                          {this.state.last_name}
                         </a>
                       </li>
                     </ul>

@@ -34,9 +34,31 @@ console.log("The customers table is created!!");
 
 */
 
-app.post('/data', function(req,res){
+app.post('/data', function(req, res){
     // var data = {location:req.body.location, categories:req.body.categories};
     var sql = 'SELECT * FROM work';
+    db.query(sql, (err, result)=>{
+        if(err) throw err;
+        console.log("The query: ", sql);
+        res.send(result); // sending the result back 
+    });
+});
+
+// filtering the job data 
+app.post('/data/filter', function(req, res){
+    var data = {location:req.body.location, categories:req.body.categories};
+    if(data.location == 'uncategorized' && data.categories != 'uncategorized'){
+        var sql = 'SELECT * FROM work WHERE categories = "' + data.categories + '"';
+    }
+    else if(data.location != 'uncategorized' && data.categories == 'uncategorized'){
+        var sql = 'SELECT * FROM work WHERE location = "' + data.location + '"';
+    }
+    else if(data.location == 'uncategorized' && data.categories == 'uncategorized'){
+        var sql = 'SELECT * FROM work';
+    }
+    else {
+        var sql = 'SELECT * FROM work WHERE location = "' + data.location + '" AND categories = "' + data.categories + '"';
+    }
     db.query(sql, (err, result)=>{
         if(err) throw err;
         console.log("The query: ", sql);
@@ -56,8 +78,7 @@ app.post('/data/id', function(req,res){
 });
  
 app.post('/addJob', function(req, res){
-    const uploadDate = new Date().getDate();
-    const uploadTime = new Date.now();
+    const uploadDate = new Date();
     const jobData = {
         title: req.body.title,
         description: req.body.descr, 
@@ -77,6 +98,7 @@ app.post('/addJob', function(req, res){
     // })
     console.log('-----------------------------------------')
     console.log(jobData);
+    console.log(uploadDate);
     console.log('-----------------------------------------')
 });
 

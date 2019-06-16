@@ -30,6 +30,7 @@ class Login extends Component {
     })
     .then((res) => {
       if(res.data){
+        console.log(res.data)
         Cookies.set('first_name', res.data[0]["first_name"]);
         Cookies.set('last_name', res.data[0]["last_name"]);
         Cookies.set('email', res.data[0]["email"]);

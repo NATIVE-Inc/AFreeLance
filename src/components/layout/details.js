@@ -16,6 +16,7 @@ class Work extends Component {
       id: Id,
     })
     .then((res) => {
+      console.log(res.data)
       this.setState({
         workInfo: res.data,
       }) 
@@ -36,7 +37,11 @@ class Work extends Component {
           <div className="col-md-8 details-info">
             <h4 className="details-title">{item.title}</h4>
             <p className="details-description">{item.description}</p>
-            <button class="btn btn-primary apply" id={item.id}>Apply</button>
+            <p>author =>{item.author}</p>
+            <p>location =>{item.location}</p>
+            <p>skills =>{item.skills}</p>
+            <p>up_date =>{item.up_date}</p>
+            <button className="btn btn-primary floatRight" id={item.id}>Apply</button>
           </div>
       </div>
       );

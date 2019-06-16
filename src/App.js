@@ -28,7 +28,7 @@ class App extends Component {
     const user = Cookies.get('user');
     return (
     <HashRouter>
-      <div className={Cookies.get('user')}>
+      <div className={user}>
         <Navbar/>
         <Route exact path="/" component={Landing}/>
         <Route path="/work" component={Work}/>

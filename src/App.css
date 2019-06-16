@@ -381,6 +381,9 @@ input#search-bar{
   background: #dcdcdc30;
 }
 
-.apply {
+.details-img {
+  height: 35vh;
+}
+.floatRight {
   float: right;
 }
