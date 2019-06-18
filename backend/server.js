@@ -39,7 +39,7 @@ app.post('/data', function(req, res){
     var sql = 'SELECT * FROM work';
     db.query(sql, (err, result)=>{
         if(err) throw err;
-        console.log("The query: ", sql);
+        console.log("The query: ", result);
         res.send(result); // sending the result back 
     });
 });
@@ -79,6 +79,8 @@ app.post('/data/id', function(req,res){
  
 app.post('/addJob', function(req, res){
     const uploadDate = new Date();
+    console.log(uploadDate)
+    const img = 'images/blog/02.jpg'
     const jobData = {
         title: req.body.title,
         description: req.body.descr, 
@@ -90,21 +92,19 @@ app.post('/addJob', function(req, res){
         category: req.body.category
 
     };
-    // var sql = 'INSERT * INTO work';
-    // db.query(sql, (err, result)=> {
-    //     if(err) throw err;
-    //     console.log("The query: ", sql);
-    //     res.send(result);
-    // })
-    console.log('-----------------------------------------')
-    console.log(jobData);
-    console.log(uploadDate);
-    console.log('-----------------------------------------')
+    var sql = 'INSERT INTO work(img, title, description, categories, location, up_date, skills, author, fee) VALUES ("' + img + '","' + jobData.title + '","' + jobData.description + '","' + jobData.category + '","' + jobData.location + '","' + uploadDate + '","' + jobData.skills + '","' + jobData.author + '","' + jobData.amount + '")';
+    db.query(sql, (err, result)=> {
+        if(err) throw err;
+        console.log("The query: ", sql);
+        res.send(true);
+        console.log('Post uploaded')
+        console.log(result)
+    })
 });
 
 app.post('/oAuth/signup', function(req, res) {
     const today = 'This is the date' // new Date.Date();
-    const signupData = {
+    const signupData = { 
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         email: req.body.email,

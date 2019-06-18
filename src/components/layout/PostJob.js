@@ -69,6 +69,7 @@ class PostJob extends Component {
       this.setState({
         result: res.data,
       }) 
+      this.props.history.push('/work')
     })
   };
 

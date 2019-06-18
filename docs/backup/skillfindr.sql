@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 12 juin 2019 à 20:01
+-- Généré le :  mar. 18 juin 2019 à 01:08
 -- Version du serveur :  5.7.24
--- Version de PHP :  5.6.40
+-- Version de PHP :  7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,7 +43,8 @@ CREATE TABLE IF NOT EXISTS `oauth` (
 
 INSERT INTO `oauth` (`first_name`, `last_name`, `email`, `password`, `auth_date`) VALUES
 ('John', 'smith', 'be.jema@yahoo.fr', 'smile4me', 'This is the date'),
-('', 'dh', 'be.jema@yahoo.frs', 'smile4me', 'This is the date');
+('', 'dh', 'be.jema@yahoo.frs', 'smile4me', 'This is the date'),
+('Sado', 'Gilles', 'gilles@gmail.com', 't', 'This is the date');
 
 -- --------------------------------------------------------
 
@@ -53,23 +54,27 @@ INSERT INTO `oauth` (`first_name`, `last_name`, `email`, `password`, `auth_date`
 
 DROP TABLE IF EXISTS `work`;
 CREATE TABLE IF NOT EXISTS `work` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `img` varchar(30) NOT NULL,
   `title` text NOT NULL,
   `description` mediumtext NOT NULL,
-  `categories` enum('Agriculture','Information Technology','Business','Real Estate') NOT NULL,
-  `location` enum('Yaounde','Douala','Buea','Bamenda') NOT NULL,
-  `up_date` date NOT NULL,
-  `skills` enum('Programming','Communication','Hair dressing','Carpenter') NOT NULL,
-  `author` varchar(50) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `categories` varchar(30) NOT NULL,
+  `location` varchar(30) NOT NULL,
+  `up_date` text NOT NULL,
+  `skills` varchar(100) NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `fee` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `work`
 --
 
-INSERT INTO `work` (`img`, `title`, `description`, `categories`, `location`, `up_date`, `skills`, `author`) VALUES
-('images/blog/01.jpg', 'Blog Spot', 'This is a description', 'Agriculture', 'Yaounde', '2019-05-01', 'Programming', ''),
-('images/blog/02.jpg', 'Blog Spot 2', 'This is a description', 'Information Technology', 'Douala', '2019-05-09', 'Communication', '');
+INSERT INTO `work` (`id`, `img`, `title`, `description`, `categories`, `location`, `up_date`, `skills`, `author`, `fee`) VALUES
+(1, 'images/blog/01.jpg', 'Blog Spot', 'This is a description', 'Agriculture', 'Yaounde', '2019-05-01 00:00:00', 'Programming', '', 0),
+(2, 'images/blog/02.jpg', 'Blog Spot 2', 'This is a description', 'Information Technology', 'Douala', '2019-05-09 00:00:00', 'Communication', '', 0),
+(3, 'images/blog/02.jpg', 'I need a website', 'I want to create a wordpress website for my company.', 'Information Technology', 'null', 'Mon Jun 17 2019 20:16:55 GMT+0100 (West Africa Standard Time)', 'programming', 'Sado Gilles', 500);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
