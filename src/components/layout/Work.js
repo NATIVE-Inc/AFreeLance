@@ -62,11 +62,10 @@ class Work extends Component {
                   <div className="row card-work"  id={item.id} onClick={this.getDetails.bind(this)}>
                     <img className="card-img col-md-2" src={require(`../${item.img}`)}  alt="the_image"/>
                     <div className="card-block col-md-8">
-                      <h4 className="card-title paddingClr">{item.title}</h4>
-                      <h5 className="crumbs">{item.location} / {item.author} <span className="up_date">(posted {item.up_date} ago)</span></h5>
-                      
+                      <div className="card-title paddingClr">{item.title}</div>
                       <p className="card-text paddingClr">{item.description}</p><br/>
-                      <small><a>{item.categories}</a> <a>{item.skills}</a></small>
+                      <div className="card-info ">{item.location} / {item.author} <span className="up_date">(posted {item.up_date} ago)</span></div>
+                      <div className="card-info "><a>{item.categories}</a> <a>{item.skills}</a></div>
                     </div>
                     <div className="col-md-2">
                       {item.fee} FCFA
@@ -76,10 +75,11 @@ class Work extends Component {
     })
     return (
             <div className="container">
-              <label> Filters </label>
               <div className="col-md-12 text-center">
                 <div className="row">
-                  <div className="form-group col-md-2 ">
+                  <div className="col-md-2 section-container">
+                  <div className="form-group theShadow sidebar">
+              <label> Filters </label>
                     <fieldset className="form-group">
                       <select className="form-control"  ref="categories" onChange={this.handleChange.bind(this)}>
                         <option value='uncategorized'>Category</option>
@@ -97,9 +97,12 @@ class Work extends Component {
                       </select>
                     </fieldset>
                   </div>
-                  <div className="form-group col-sm-6 col-md-10 theShadow">
-                    <div><br/><h5>24 results</h5></div><hr/>
-                      { dataMySQL }
+                  </div>
+                  <div className="form-group col-md-10 section-container">
+                    <div className="col-md-12 theShadow">
+                      <div><br/><h5>24 results</h5></div>
+                        { dataMySQL }
+                    </div>
                   </div>
                 </div>
               </div>
