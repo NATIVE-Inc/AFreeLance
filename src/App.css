@@ -1,3 +1,4 @@
+
 .top {
   position: relative;
   background-color: #ffffff;
@@ -94,6 +95,7 @@ body, #root, .holder, .sidenav {
   height: inherit;
   font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 0.9rem;
+  background-color: #f0f0f0;
 }
 
 /* dropdown menus */
@@ -370,56 +372,70 @@ select.form-control{
   text-decoration: none;
 }
 .navbar-expand-sm .navbar-nav .nav-link {
-  opacity: 0.5;
   text-decoration: none;
+  margin: 0 !important;
 }
-.navbar-expand-sm .navbar-nav .nav-link:hover {
+.navlink .a:hover {
   opacity: 1;
 }
-
-/* search bar  */
-.search-container{
-  width: 90%;
-  display: block;
-  margin: 0 auto;
-}
-
-input#search-bar{
-  margin: 0 auto;
+.navbar{
+  display: table;
   width: 100%;
-  height: 45px;
-  padding: 0 20px;
-  font-size: 1rem;
-  border: 1px solid #D0CFCE;
-  outline: none;
- }
-
-.search-icon{
-  position: relative;
-  float: right;
-  width: 75px;
-  height: 75px;
-  top: -62px;
-  right: -45px;
+  padding: 0;
+}
+.nav-link .a {
+  opacity: 0.7;
 }
 
-/* details page  */
-.details-title {
-  padding: 2vh;
-  font-size: 3em;
-  font-family: arial;
-  font-weight: bold;
+/* information about user on navbar */
+.nav-info {
+  color: white;
+  display: flex;
+  margin: 0 5px;
 }
 
-.details-description {
-  padding: 3vh;
-  font-size: 1.5em;
-  background: #dcdcdc30;
+.nav-info-img {
+  height: inherit;
+  width: 39px;
+  object-fit: cover;
+  margin: 0 7px;
 }
 
-.details-img {
-  height: 35vh;
+.nav-info.details {
+  float: left;
+
 }
-.floatRight {
-  float: right;
+
+.ml-auto {
+  padding: 0;
 }
+
+.nav-info-details .bal {
+  font-size: 0.7rem;
+}
+
+
+/* details page */
+.details-card {
+  margin: 15px;
+  padding: 13px;
+}
+
+.details-card h4 {
+  font-size: 20px;
+}
+
+.details-item {
+  margin-bottom: 0.4rem;
+}
+
+.details.title{
+
+}
+
+.details-card textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 3px;
+}
+

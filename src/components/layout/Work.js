@@ -67,7 +67,7 @@ class Work extends Component {
                       <div className="card-info ">{item.location} / {item.author} <span className="up_date">(posted {item.up_date} ago)</span></div>
                       <div className="card-info "><a>{item.categories}</a> <a>{item.skills}</a></div>
                     </div>
-                    <div className="col-md-2">
+                    <div className="col-md-2 fee">
                       {item.fee} FCFA
                     </div>
                 </div>
@@ -75,9 +75,9 @@ class Work extends Component {
     })
     return (
             <div className="container">
-              <div className="col-md-12 text-center">
+              <div className="col-md-12 ">
                 <div className="row">
-                  <div className="col-md-2 section-container">
+                  <div className="col-md-3 section-container">
                   <div className="form-group theShadow sidebar">
               <label> Filters </label>
                     <fieldset className="form-group">
@@ -98,7 +98,7 @@ class Work extends Component {
                     </fieldset>
                   </div>
                   </div>
-                  <div className="form-group col-md-10 section-container">
+                  <div className="form-group col-md-9 section-container">
                     <div className="col-md-12 theShadow">
                       <div><br/><h5>24 results</h5></div>
                         { dataMySQL }

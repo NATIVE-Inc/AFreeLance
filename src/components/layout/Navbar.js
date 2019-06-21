@@ -30,7 +30,7 @@ class Navbar extends Component {
             <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
             <div className="container">
             <NavLink className="navbar-brand" exact to="/">
-                SkillFindr
+            AFreeLancer
             </NavLink>
             <button
                 className="navbar-toggler"
@@ -68,7 +68,7 @@ class Navbar extends Component {
                 <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
                 <div className="container">
                   <NavLink className="navbar-brand" exact to="/">
-                    SkillFindr
+                    AFreeLancer
                   </NavLink>
                   <button
                     className="navbar-toggler"
@@ -92,19 +92,16 @@ class Navbar extends Component {
                         </NavLink>
                       </li>
                       <li className="nav-item">
-                        <NavLink className="nav-link" to="/postjob">
+                        <NavLink className="nav-link btn btn-primary " to="/postjob" >
                           Post a Job
                         </NavLink>
                       </li>
-                      <li className="nav-item">
-                        <form className="search-container">
-                            <input type="text" id="search-bar" placeholder="Search Jobs?"/>
-                        </form>
-                      </li>
-                      <li className="nav-item">
-                        <a className="nav-link btn btn-primary" onClick={this.logout.bind(this)}>
-                          {this.state.last_name}
-                        </a>
+                      <li className="nav-item nav-info">
+                        <img className="nav-info-img" alt="the_image" src={require('../images/blog/01.jpg')}/>
+                        <div className="nav-info-details">
+                          <span><b>{this.state.last_name}</b></span><br/>
+                          <span className="bal">0.00 FCFA</span>
+                        </div>
                       </li>
                     </ul>
                   </div>

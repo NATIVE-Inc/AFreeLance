@@ -20,17 +20,21 @@
     "react-datepicker": "^2.7.0",
     "react-dom": "^16.3.2",
     "react-form-login": "^1.1.4",
+    "react-icons": "^3.7.0",
     "react-redux": "^5.0.7",
     "react-reveal": "^1.2.2",
     "react-router": "^4.4.0-alpha.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-transition-group": "^4.1.1",
     "reactjs-localstorage": "0.0.7",
     "reactstrap": "^8.0.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
-    "sweetalert": "^2.1.0"
+    "styled-components": "^4.3.2",
+    "sweetalert": "^2.1.0",
+    "typeface-roboto": "0.0.54"
   },
   "scripts": {
     "start": "react-scripts start",
