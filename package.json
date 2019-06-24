@@ -1,4 +1,5 @@
 {
+  "homepage": "https://github.com/NATIVE-Inc/AFreeLance.git",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -7,12 +8,14 @@
     "axios": "^0.18.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
-    "cors": "^2.8.4",
-    "express": "^4.17.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
     "express-graphql": "^0.6.12",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.9.2",
     "js-cookie": "^2.2.0",
+    "mongoose": "^5.6.0",
+    "morgan": "^1.9.1",
     "mysql": "^2.17.1",
     "nodemon": "^1.19.1",
     "react": "^16.3.2",
@@ -41,6 +44,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "predoploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
