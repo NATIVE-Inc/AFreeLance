@@ -25,7 +25,7 @@ class SignUp extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://127.0.0.1:3210/oAuth/signup';
+    var url = 'http://localhost:3001/api/signup';
     axios.post(url, {
       first_name: this.state.first_name, 
       last_name: this.state.last_name,
@@ -33,7 +33,14 @@ class SignUp extends Component {
       password: this.state.password
     })
     .then((res) => {
-      this.props.history.push('/login')
+      if(res.status === 200){
+        this.props.history.push('/login')
+      } else {
+        this.setSate({
+          warning: res.data,
+        });
+      }
+
     });
   }
 
@@ -46,7 +53,7 @@ class SignUp extends Component {
                     <div className="form-group">
                         <div className="row">
                           <div className="col">
-                            <label for="exampleFormControlInput1">First name</label>
+                            <label htmlFor="exampleFormControlInput1">First name</label>
                             <input name="first_name" type="text" className="form-control"  onChange={this.handleChange.bind(this)} placeholder="John" required/>
                           </div>
                           <div className="col">
@@ -58,6 +65,8 @@ class SignUp extends Component {
                     <div className="form-group">
                       <label htmlFor="exampleFormControlInput1">Email address</label>
                       <input name="email" type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" onChange={this.handleChange.bind(this)} required/>
+                      
+                      <label className="warning" >{this.state.warning}</label>
                       <small className="text-muted">Your email will not be shared with any third party.</small>
                     </div>
                     <div className="form-group">

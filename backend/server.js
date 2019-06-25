@@ -1,146 +1,133 @@
 const express = require('express');
-const app = express();
-const mysql = require('mysql');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const path = require('path');
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const User = require('./models/users');
 
-app.use(bodyParser.json());
+// Import the library:
+var cors = require('cors');
+
+const app = express();
+
+// Then use it before your routes are set up:
 app.use(cors());
 
-// connection details 
-const db = mysql.createConnection({
-    host : '127.0.0.1',
-    user : 'root',
-    password : '',
-    database : 'skillfindr'
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+const mongo_uri = 'mongodb://localhost/afreelancer';
+
+mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
+  if (err) {
+    throw err;
+  } else {
+    console.log(`Successfully connected to ${mongo_uri}`);
+  }
 });
 
-db.connect();
+app.use(express.static(path.join(__dirname, 'public')));
 
-/* This is to create the database 
-  // creating db 
-let tsql = `CREATE DATABASE nodemysql`;
-db.query(tsql, function (err, result) {
-// if (err) throw err;
-console.log("The Database is created!!");
-});
+// the default api route
+app.get('/api', function (req, res) {
+    console.log('got here');
+  res.status(200).send("Welcome to the api!");
+}); 
 
-// creating table
-bsql = `CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))`;
-db.query(bsql, function (err, result) {
-// if (err) throw err;
-console.log("The customers table is created!!");
-});
+// route to sing up users 
+app.post('/api/signup', function(req, res) {
+  const { first_name, last_name, email, password } = req.body;
+  const user = new User({ first_name, last_name, email, password });
 
-*/
-
-app.post('/data', function(req, res){
-    // var data = {location:req.body.location, categories:req.body.categories};
-    var sql = 'SELECT * FROM work';
-    db.query(sql, (err, result)=>{
-        if(err) throw err;
-        console.log("The query: ", result);
-        res.send(result); // sending the result back 
-    });
-});
-
-// filtering the job data 
-app.post('/data/filter', function(req, res){
-    var data = {location:req.body.location, categories:req.body.categories};
-    if(data.location == 'uncategorized' && data.categories != 'uncategorized'){
-        var sql = 'SELECT * FROM work WHERE categories = "' + data.categories + '"';
-    }
-    else if(data.location != 'uncategorized' && data.categories == 'uncategorized'){
-        var sql = 'SELECT * FROM work WHERE location = "' + data.location + '"';
-    }
-    else if(data.location == 'uncategorized' && data.categories == 'uncategorized'){
-        var sql = 'SELECT * FROM work';
-    }
-    else {
-        var sql = 'SELECT * FROM work WHERE location = "' + data.location + '" AND categories = "' + data.categories + '"';
-    }
-    db.query(sql, (err, result)=>{
-        if(err) throw err;
-        console.log("The query: ", sql);
-        res.send(result); // sending the result back 
-    });
-});
-
-
-app.post('/data/id', function(req,res){
-    var dataId = req.body.id
-    var sql = 'SELECT * FROM work WHERE id = "' + dataId + '"';
-    db.query(sql, (err, result)=>{
-        if(err) throw err;
-        console.log('sending id data')
-        res.send(result); // sending the result back 
-    });
-});
- 
-app.post('/addJob', function(req, res){
-    const uploadDate = new Date();
-    console.log(uploadDate)
-    const img = 'images/blog/02.jpg'
-    const jobData = {
-        title: req.body.title,
-        description: req.body.descr, 
-        deadline: req.body.deadline, 
-        amount: req.body.amount, 
-        skills: req.body.skills,
-        author: req.body.author,
-        location: req.body.location,
-        category: req.body.category
-
+  // checking if email is already in use 
+  User.findOne({ email }, function(err, user) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else if (user) {
+        // if there is already a user with this email
+        res.status(401).send('Email exist!')
+    } else {
+        // if everytinbg is ok then create a new user 
+        user.save(function(err) {
+            if (err) {
+              console.log(err);
+              res.status(500).send("Error registering new user please try again.");
+            } else {
+              console.log('Successfully created user')
+              res.status(200).send("Successfully created user");
+            }
+        });
     };
-    var sql = 'INSERT INTO work(img, title, description, categories, location, up_date, skills, author, fee) VALUES ("' + img + '","' + jobData.title + '","' + jobData.description + '","' + jobData.category + '","' + jobData.location + '","' + uploadDate + '","' + jobData.skills + '","' + jobData.author + '","' + jobData.amount + '")';
-    db.query(sql, (err, result)=> {
-        if(err) throw err;
-        console.log("The query: ", sql);
-        res.send(true);
-        console.log('Post uploaded')
-        console.log(result)
-    })
+  })
 });
 
-app.post('/oAuth/signup', function(req, res) {
-    const today = 'This is the date' // new Date.Date();
-    const signupData = { 
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        email: req.body.email,
-        password: req.body.password
+// route to login users
+app.post('/api/login', function(req, res) {
+  var { email, password } = req.body;
+
+  // checking if email is already in use 
+  User.findOne({ email }, function(err, user) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else if (user) {
+        // if there is a user with this email
+        console.log("user.email -------------------------")
+        console.log(user.email)
+        console.log("email -------------------------")
+        console.log(email)
+        if(user.email === email){
+            console.log('got in here')
+            res.status(200).send('correct password')
+        } else {
+            res.status(500).send('wrong password')
+        }
+    } else {
+        // the user doesn't exist 
+        res.send('No user found')
     };
-    var sql = 'INSERT INTO oauth(first_name, last_name, email, password, auth_date) VALUES ("' + signupData.first_name + '","' + signupData.last_name + '","' + signupData.email + '","' + signupData.password + '","' + today + '")';
-    db.query(sql, (err, result)=> {
-        if(err) throw err;
-        console.log(result)
-        console.log("successfully created user");
-        res.send(true);
-    })
-
-})
-
-app.post('/oAuth/login', function(req, res){
-    const loginData = {
-        email: req.body.email,
-        password: req.body.password
-    }; 
-
-    var sql = 'SELECT * FROM oauth WHERE email LIKE "' + loginData.email + '" AND password LIKE "' + loginData.password + '" '
-
-    db.query(sql, (err, result)=> {
-        if(err) throw err;
-        if(result.length !== 0){
-            console.log('login confirmed')
-            res.send(result)
-        }
-        else{
-            console.log('no user exist')
-            res.send(false)
-        }
-    })
-}) 
-
-app.listen(3210, ()=>{
-    console.log('Server listening on port 3210')
+  })
 });
+
+app.post('/api/authenticate', function(req, res) {
+  const { email, password } = req.body;
+  User.findOne({ email }, function(err, user) {
+    if (err) {
+      console.error(err);
+      res.status(500)
+        .json({
+        error: 'Internal error please try again'
+      });
+    } else if (!user) {
+      res.status(401)
+        .json({
+        error: 'Incorrect email or password'
+      });
+    } else {
+      user.isCorrectPassword(password, function(err, same) {
+        if (err) {
+          res.status(500)
+            .json({
+            error: 'Internal error please try again'
+          });
+        } else if (!same) {
+          res.status(401)
+            .json({
+            error: 'Incorrect email or password'
+          });
+        } else {
+          // Issue token
+          const payload = { email };
+          const token = jwt.sign(payload, secret, {
+            expiresIn: '1h'
+          });
+          res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+        }
+      });
+    }
+  });
+});
+
+// listening on this port 
+app.listen(3001);

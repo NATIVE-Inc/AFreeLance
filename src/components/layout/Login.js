@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie'
 
 class Login extends Component {
 
@@ -23,26 +22,21 @@ class Login extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://127.0.0.1:3210/oAuth/login';
+    var url = 'http://localhost:3001/api/login';
     axios.post(url, {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
     })
     .then((res) => {
-      if(res.data){
-        console.log(res.data)
-        Cookies.set('first_name', res.data[0]["first_name"]);
-        Cookies.set('last_name', res.data[0]["last_name"]);
-        Cookies.set('email', res.data[0]["email"]);
-        this.props.history.push('/');
-      }
-      else{
+      if(res.status === 200){
+        this.props.history.push('/')
+      } else {
         this.setState({
-          warning: "Account not found",
-        }) 
+          warning: res.data,
+        })
       }
     });
-  };
+  };  
 
   render() {
     return (
