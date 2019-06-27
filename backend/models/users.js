@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 // this will be our data base's data structure 
-const users = new Schema(
+const User = new Schema(
   {
     id: Number,
     first_name: String,
@@ -15,4 +15,4 @@ const users = new Schema(
 );
 
 // export the new Schema so we could modify it using Node.js
-module.exports = mongoose.model("Data", users);
+module.exports = mongoose.model("Data", User);

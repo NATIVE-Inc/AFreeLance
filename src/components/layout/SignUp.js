@@ -33,15 +33,14 @@ class SignUp extends Component {
       password: this.state.password
     })
     .then((res) => {
-      if(res.status === 200){
+      if(res.data === 'Success'){
         this.props.history.push('/login')
       } else {
-        this.setSate({
+        this.setState({
           warning: res.data,
-        });
+        })
       }
-
-    });
+    })
   }
 
   render() {
@@ -63,14 +62,12 @@ class SignUp extends Component {
                         </div>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleFormControlInput1">Email address</label>
-                      <input name="email" type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" onChange={this.handleChange.bind(this)} required/>
-                      
+                      <label htmlFor="exampleFormControlInput1">Email address &nbsp;&nbsp;&nbsp;</label>
                       <label className="warning" >{this.state.warning}</label>
+                      <input name="email" type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" onChange={this.handleChange.bind(this)} required/>
                       <small className="text-muted">Your email will not be shared with any third party.</small>
                     </div>
                     <div className="form-group">
-                      <label htmlFor="exampleFormControlInput1">Password</label>
                       <input name="password" type="password" className="form-control" id="exampleFormControlInput1"  onChange={this.handleChange.bind(this)} required/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>

@@ -1,9 +1,12 @@
+const localStorage = require('localStorage');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
+
+// data schemas for mongodb database 
 const User = require('./models/users');
 
 // Import the library:
@@ -32,14 +35,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // the default api route
 app.get('/api', function (req, res) {
-    console.log('got here');
   res.status(200).send("Welcome to the api!");
 }); 
 
-// route to sing up users 
+/* 
+  Route: signup
+  Type: POST 
+*/
 app.post('/api/signup', function(req, res) {
   const { first_name, last_name, email, password } = req.body;
-  const user = new User({ first_name, last_name, email, password });
+  const theUser = new User({ first_name, last_name, email, password });
+  console.log(first_name, last_name, email, password)
 
   // checking if email is already in use 
   User.findOne({ email }, function(err, user) {
@@ -47,23 +53,26 @@ app.post('/api/signup', function(req, res) {
       res.status(401).send('Internal Server Error')
     } else if (user) {
         // if there is already a user with this email
-        res.status(401).send('Email exist!')
+        res.status(200).send('Email exist!')
     } else {
         // if everytinbg is ok then create a new user 
-        user.save(function(err) {
+        theUser.save(user, function(err) {
             if (err) {
               console.log(err);
               res.status(500).send("Error registering new user please try again.");
             } else {
               console.log('Successfully created user')
-              res.status(200).send("Successfully created user");
+              res.status(200).send("Success");
             }
         });
     };
   })
 });
 
-// route to login users
+/*
+  Route: /api/login
+  Type: POST
+*/
 app.post('/api/login', function(req, res) {
   var { email, password } = req.body;
 
@@ -72,15 +81,13 @@ app.post('/api/login', function(req, res) {
     if (err) {
       res.status(401).send('Internal Server Error')
     } else if (user) {
-        // if there is a user with this email
-        console.log("user.email -------------------------")
-        console.log(user.email)
-        console.log("email -------------------------")
-        console.log(email)
-        if(user.email === email){
-            console.log('got in here')
-            res.status(200).send('correct password')
+        console.log("user exist")
+        // checking for the password validity 
+        if(user.password === password){
+            // sends user information back to frontend
+            res.status(200).send(user)
         } else {
+            console.log('wrong password')
             res.status(500).send('wrong password')
         }
     } else {

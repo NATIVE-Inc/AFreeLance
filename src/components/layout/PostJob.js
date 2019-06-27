@@ -1,27 +1,19 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import Auth from '../modules/Auth';
 
 
 import "react-datepicker/dist/react-datepicker.css";
 let skillList1 =  [];
 
 class PostJob extends Component {
-  constructor(props) {
+    constructor(props) {
       super(props);
       this.state = {
-        title: this.refs.title,
-        descr: this.refs.descr,
-        amount: this.refs.amount,
-        category: this.refs.category,
-        deadline: null, 
-        skills: ['reactjs', 'python', 'programming', 'backend'],
-        author: Cookies.get('first_name') + " " + Cookies.get('last_name'),
-        location: null,
-        result: null,
-
-        skillList: []
-      };
+        isAuthenticated: Auth.isUserAuthenticated(),
+        token: Auth.getToken(),
+        skills: ['prog', 'gram'],
+      }
     }
    
     handleChange(e){
@@ -74,10 +66,8 @@ class PostJob extends Component {
   };
 
   componentDidMount() {
-    if(Cookies.get('first_name') === undefined){
+    if(this.state.isAuthenticated === null){
       this.props.history.push('/login')
-    }
-    else{
     }
   }
   render() {

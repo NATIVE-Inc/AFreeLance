@@ -29,13 +29,15 @@ class Login extends Component {
     })
     .then((res) => {
       if(res.status === 200){
+        localStorage.setItem('token', JSON.stringify(res.data))
         this.props.history.push('/')
+
       } else {
         this.setState({
           warning: res.data,
         })
       }
-    });
+    })
   };  
 
   render() {
