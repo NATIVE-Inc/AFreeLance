@@ -12,7 +12,6 @@ import SignUp from './components/layout/SignUp';
 import PostJob from './components/layout/PostJob';
 import Details from './components/layout/details';
 
-import Cookies from 'js-cookie';
 
 import './App.css';
 
@@ -25,10 +24,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class App extends Component {
   render() {
-    const user = Cookies.get('user');
     return (
     <HashRouter>
-      <div className={user}>
+      <div>
         <Navbar/>
         <Route exact path="/" component={Landing}/>
         <Route path="/work" component={Work}/>

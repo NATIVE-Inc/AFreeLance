@@ -8,7 +8,6 @@
     "axios": "^0.18.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
-    "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.6.12",
@@ -55,5 +54,5 @@
   "devDependencies": {
     "gh-pages": "^2.0.1"
   },
-  "proxy": "http://localhost:3001"
+  "proxy": "http://localhost:500"
 }

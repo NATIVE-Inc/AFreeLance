@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 class Work extends Component {
   constructor() {
@@ -19,20 +18,15 @@ class Work extends Component {
       console.log(res.data)
       this.setState({
         workInfo: res.data,
-      }) 
+      })
     })
   };
-
-  componentDidMount(){
-    var workId = Cookies.get('workId');
-    this.getDataId(workId)
-  }
 
 
   render() {
     const workInfo = this.state.workInfo.map((item, index)=>{
       return (
-        
+
         <div className="col-md-12 textcenter">
           <div className="row" id={item.id}>
             <div className="details-title">

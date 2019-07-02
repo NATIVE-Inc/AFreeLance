@@ -29,8 +29,7 @@ class Login extends Component {
       password: this.state.password,
     })
     .then((res) => {
-      if(res.status === 200){
-        localStorage.setItem('token', JSON.stringify(res.data))
+      if(res.data.first_name){
         // when user exist set isAuthenticate as true
         // add token to store
         const data = res.data;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 
 class Work extends Component {
   constructor() {
@@ -11,9 +10,9 @@ class Work extends Component {
         location: 'uncategorized'
       };
   }
-  
+
   filterJobs(){
-    var url = 'http://127.0.0.1:3210/data/filter';
+    var url = 'http://127.0.0.1:5000/data/filter';
     axios.post(url, {
       location: this.refs.location.value,
       categories: this.refs.categories.value
@@ -21,7 +20,7 @@ class Work extends Component {
     .then((res) => {
       this.setState({
         work: res.data,
-      }) 
+      })
     })
   };
 
@@ -35,20 +34,19 @@ class Work extends Component {
   }
 
   getJobs(){
-    var url = 'http://127.0.0.1:3210/data';
+    var url = 'http://127.0.0.1:5000/data';
     axios.post(url)
     .then((res) => {
       console.log(res.data)
       this.setState({
         work: res.data,
-      }) 
+      })
     })
   };
 
 
   getDetails(event){
     let currentId = event.currentTarget.id;
-    Cookies.set('workId', currentId)
     this.props.history.push('/details')
   }
 

@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 // data schemas for mongodb database
 const User = require('./models/users');
+const Job = require('./models/jobs');
 
 // Import the library:
 var cors = require('cors');
@@ -35,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // the default api route
 app.get('/api', function (req, res) {
-  res.status(200).send("Welcome to the api!");
+  res.status(200).send("Welcome to the NATIVE api!");
 });
 
 /*
@@ -45,7 +46,6 @@ app.get('/api', function (req, res) {
 app.post('/api/signup', function(req, res) {
   const { first_name, last_name, email, password } = req.body;
   const theUser = new User({ first_name, last_name, email, password });
-  console.log(first_name, last_name, email, password)
 
   // checking if email is already in use
   User.findOne({ email }, function(err, user) {
@@ -55,7 +55,7 @@ app.post('/api/signup', function(req, res) {
         // if there is already a user with this email
         res.status(200).send('Email exist!')
     } else {
-        // if everytinbg is ok then create a new user
+        // if everything is ok then create a new user
         theUser.save(user, function(err) {
             if (err) {
               console.log(err);
@@ -88,52 +88,48 @@ app.post('/api/login', function(req, res) {
             res.status(200).send(user)
         } else {
             console.log('wrong password')
-            res.status(500).send('wrong password')
+            res.status(200).send('wrong password')
         }
     } else {
         // the user doesn't exist
-        res.status(500).send('No user found')
+        res.status(200).send('No user found')
     };
   })
 });
 
-app.post('/api/authenticate', function(req, res) {
-  const { email, password } = req.body;
-  User.findOne({ email }, function(err, user) {
+/*
+  Route: /api/addJob
+  Type: POST
+  Description: adding jobs to the database
+*/
+app.post('/api/addJob', function(req, res) {
+  var { title, descr, deadline, amount, skillList, author, location, category } = req.body;
+  const theJob = new Job({ title, descr, deadline, amount, skillList, author, location, category })
+
+  console.log(theJob)
+  // saving the job into the database
+  theJob.save(function(err) {
     if (err) {
-      console.error(err);
-      res.status(500)
-        .json({
-        error: 'Internal error please try again'
-      });
-    } else if (!user) {
-      res.status(401)
-        .json({
-        error: 'Incorrect email or password'
-      });
+      console.log(err);
+      res.status(500).send("Error registering new user please try again.");
     } else {
-      user.isCorrectPassword(password, function(err, same) {
-        if (err) {
-          res.status(500)
-            .json({
-            error: 'Internal error please try again'
-          });
-        } else if (!same) {
-          res.status(401)
-            .json({
-            error: 'Incorrect email or password'
-          });
-        } else {
-          // Issue token
-          const payload = { email };
-          const token = jwt.sign(payload, secret, {
-            expiresIn: '1h'
-          });
-          res.cookie('token', token, { httpOnly: true }).sendStatus(200);
-        }
-      });
+      console.log('Successfully created user')
+      res.status(200).send("Success");
     }
-  });
+});
+
+/*
+  Route: /api/data
+  Type: GET
+  Description: getting all the jobs data from db
+*/
+
+/*
+  Route: /api/data/filter
+  Type: POST
+  Description: filtering through data in database
+*/
+
 });
 
 // listening on this port

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Auth from '../modules/Auth';
 
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -10,8 +9,6 @@ class PostJob extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        isAuthenticated: Auth.isUserAuthenticated(),
-        token: Auth.getToken(),
         skills: ['prog', 'gram'],
       }
     }
@@ -25,6 +22,7 @@ class PostJob extends Component {
     }
 
   skillSet(event) {
+    event.preventDefault()
     let currentColor = event.target.attributes['data-color'].value;
     let newColor = currentColor === "#FFF" ? "#ACCEEC" : "#FFF";
     event.target.style.backgroundColor = newColor;
@@ -39,37 +37,30 @@ class PostJob extends Component {
     else
       skillList1.splice(i,1)
 
-    this.setState({ skillList: skillList1})
+    this.setState({ skillList: skillList1 })
 
   }
 
   addJob(e){
     e.preventDefault()
-    var url = 'http://127.0.0.1:5000/addJob';
+    var url = 'http://127.0.0.1:5000/api/addJob';
     axios.post(url, {
       title: this.refs.title.value,
       descr: this.refs.descr.value,
       deadline: this.state.deadline,
       amount: this.refs.amount.value,
-      skills: this.state.skillList,
+      skillList: this.state.skillList,
       author: this.state.author,
       location: this.state.location,
       category: this.refs.category.value
     })
     .then((res) => {
-      console.log(res.data);
-      this.setState({
-        result: res.data,
-      })
-      this.props.history.push('/work')
+      if (res.status === 200) {
+        this.props.history.push('/work')
+      }
     })
   };
 
-  componentDidMount() {
-    if(this.state.isAuthenticated === null){
-      this.props.history.push('/login')
-    }
-  }
   render() {
     const skillset = this.state.skills.map((item, index) =>{
       return(

@@ -85,4 +85,5 @@ This is used to keep track of a global state for the whole application
 - [] ajax verifications
 - [] protect routes with authentication
 - [] counting number of post retrieved
+- [] place warnings for when db is down
 

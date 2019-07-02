@@ -53,7 +53,7 @@ class Navbar extends Component {
                 <li className="nav-item nav-info">
                   <img className="nav-info-img" alt="the_image" src={require('../images/blog/01.jpg')}/>
                     <div className="nav-info-details">
-                    <span><b>{this.props.theState.token.first_name}</b></span><br/>
+                    <span><b>{this.props.theState.token.first_name} {this.props.theState.token.last_name}</b></span><br/>
                     <span className="bal" onClick={this.logout}>0.00 FCFA</span>
                   </div>
                 </li>
