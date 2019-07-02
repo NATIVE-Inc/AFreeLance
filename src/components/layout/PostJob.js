@@ -15,7 +15,7 @@ class PostJob extends Component {
         skills: ['prog', 'gram'],
       }
     }
-   
+
     handleChange(e){
       const name = e.target.name;
       const value = e.target.value;
@@ -36,20 +36,20 @@ class PostJob extends Component {
     var i = skillList1.indexOf(thevalue)
     if (i === -1)
       skillList1.push(thevalue);
-    else  
+    else
       skillList1.splice(i,1)
 
     this.setState({ skillList: skillList1})
 
-  } 
+  }
 
   addJob(e){
     e.preventDefault()
-    var url = 'http://127.0.0.1:3210/addJob';
+    var url = 'http://127.0.0.1:5000/addJob';
     axios.post(url, {
-      title: this.refs.title.value, 
+      title: this.refs.title.value,
       descr: this.refs.descr.value,
-      deadline: this.state.deadline, 
+      deadline: this.state.deadline,
       amount: this.refs.amount.value,
       skills: this.state.skillList,
       author: this.state.author,
@@ -60,7 +60,7 @@ class PostJob extends Component {
       console.log(res.data);
       this.setState({
         result: res.data,
-      }) 
+      })
       this.props.history.push('/work')
     })
   };

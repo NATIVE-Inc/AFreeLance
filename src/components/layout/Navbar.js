@@ -1,27 +1,23 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { createHashHistory } from 'history';
-import Auth from '../modules/Auth';
+import { connect } from 'react-redux';
 
 export const history = createHashHistory()
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isAuthenticated: Auth.isUserAuthenticated(),
-      token: Auth.getToken(),
-    }
+
+  logout = (e) => {
+    this.props.dispatch({
+      type: 'LOGOUT'
+    })
+    console.log('logged out')
+    // return to homepage whenever user logs out
+    history.push('/')
   }
-  logout(){
-      Auth.deAuthenticateUser();
-      this.setState({
-        isAuthenticated: Auth.isUserAuthenticated(),
-        token: null
-      });
-    }
+
   render() {
-      if (this.state.isAuthenticated){
+      if (this.props.theState.isAuthenticated){
         return (
           <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
           <div className="container">
@@ -36,7 +32,7 @@ class Navbar extends Component {
             >
               <span className="navbar-toggler-icon" />
             </button>
-  
+
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -56,9 +52,9 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item nav-info">
                   <img className="nav-info-img" alt="the_image" src={require('../images/blog/01.jpg')}/>
-                  <div className="nav-info-details">
-                    <span><b>{this.state.token.first_name}</b></span><br/>
-                    <span className="bal" onClick={this.logout()}>0.00 FCFA</span>
+                    <div className="nav-info-details">
+                    <span><b>{this.props.theState.token.first_name}</b></span><br/>
+                    <span className="bal" onClick={this.logout}>0.00 FCFA</span>
                   </div>
                 </li>
               </ul>
@@ -98,16 +94,20 @@ class Navbar extends Component {
                     <NavLink className="nav-link" to="/signup">
                     Sign up
                     </NavLink>
-                </li>
+                    </li>
                 </ul>
             </div>
             </div>
         </nav>
         );
         }
-        
+
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    theState: state
   }
 }
 
-
-export default Navbar;
+export default connect(mapStateToProps)(Navbar);

@@ -6,7 +6,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
-// data schemas for mongodb database 
+// data schemas for mongodb database
 const User = require('./models/users');
 
 // Import the library:
@@ -36,18 +36,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 // the default api route
 app.get('/api', function (req, res) {
   res.status(200).send("Welcome to the api!");
-}); 
+});
 
-/* 
+/*
   Route: signup
-  Type: POST 
+  Type: POST
 */
 app.post('/api/signup', function(req, res) {
   const { first_name, last_name, email, password } = req.body;
   const theUser = new User({ first_name, last_name, email, password });
   console.log(first_name, last_name, email, password)
 
-  // checking if email is already in use 
+  // checking if email is already in use
   User.findOne({ email }, function(err, user) {
     if (err) {
       res.status(401).send('Internal Server Error')
@@ -55,7 +55,7 @@ app.post('/api/signup', function(req, res) {
         // if there is already a user with this email
         res.status(200).send('Email exist!')
     } else {
-        // if everytinbg is ok then create a new user 
+        // if everytinbg is ok then create a new user
         theUser.save(user, function(err) {
             if (err) {
               console.log(err);
@@ -76,13 +76,13 @@ app.post('/api/signup', function(req, res) {
 app.post('/api/login', function(req, res) {
   var { email, password } = req.body;
 
-  // checking if email is already in use 
+  // checking if email is already in use
   User.findOne({ email }, function(err, user) {
     if (err) {
       res.status(401).send('Internal Server Error')
     } else if (user) {
         console.log("user exist")
-        // checking for the password validity 
+        // checking for the password validity
         if(user.password === password){
             // sends user information back to frontend
             res.status(200).send(user)
@@ -91,8 +91,8 @@ app.post('/api/login', function(req, res) {
             res.status(500).send('wrong password')
         }
     } else {
-        // the user doesn't exist 
-        res.send('No user found')
+        // the user doesn't exist
+        res.status(500).send('No user found')
     };
   })
 });
@@ -136,5 +136,9 @@ app.post('/api/authenticate', function(req, res) {
   });
 });
 
-// listening on this port 
-app.listen(3001);
+// listening on this port
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on PORT ${PORT}`);
+});

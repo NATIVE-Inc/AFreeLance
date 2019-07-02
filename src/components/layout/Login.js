@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 class Login extends Component {
 
@@ -11,7 +12,7 @@ class Login extends Component {
         password: ''
       }
     }
-
+  // used to update input fields in state
   handleChange(e){
     const name = e.target.name;
     const value = e.target.value;
@@ -22,7 +23,7 @@ class Login extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://localhost:3001/api/login';
+    var url = 'http://localhost:5000/api/login';
     axios.post(url, {
       email: this.state.email,
       password: this.state.password,
@@ -30,6 +31,14 @@ class Login extends Component {
     .then((res) => {
       if(res.status === 200){
         localStorage.setItem('token', JSON.stringify(res.data))
+        // when user exist set isAuthenticate as true
+        // add token to store
+        const data = res.data;
+        this.props.dispatch({
+          type: 'LOGIN',
+          data
+        })
+        // console.log(this.props.theState) // this displays the state from store
         this.props.history.push('/')
 
       } else {
@@ -38,14 +47,14 @@ class Login extends Component {
         })
       }
     })
-  };  
+  };
 
   render() {
     return (
           <div className="container">
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">Sign In</h1>
-                <form ref="myForm" className="theForm" onSubmit={this.handleSubmit.bind(this)}> 
+                <form ref="myForm" className="theForm" onSubmit={this.handleSubmit.bind(this)}>
                     <div className="form-group">
                       <label htmlFor="exampleFormControlInput1">Email address</label>
                       <input name='email' type="email" className="form-control" placeholder="name@example.com" value={this.state.email} onChange={this.handleChange.bind(this)}/>
@@ -69,5 +78,10 @@ class Login extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    theState: state
+  }
+}
 
-export default Login;
+export default connect(mapStateToProps)(Login);

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  Route, 
+  Route,
   HashRouter
 } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
@@ -19,7 +19,7 @@ import './App.css';
 // importing bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
 
-// the native page imports 
+// the native page imports
 
 
 

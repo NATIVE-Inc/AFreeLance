@@ -25,9 +25,9 @@ class SignUp extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://localhost:3001/api/signup';
+    var url = 'http://localhost:5000/api/signup';
     axios.post(url, {
-      first_name: this.state.first_name, 
+      first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
       password: this.state.password
@@ -48,7 +48,7 @@ class SignUp extends Component {
           <div className="container">
               <div className="col-md-12 text-center">
                 <h1 className="display-3 mb-4">Sign Up</h1>
-                <form ref="myForm" className="theForm" onSubmit={this.handleSubmit.bind(this)}> 
+                <form ref="myForm" className="theForm" onSubmit={this.handleSubmit.bind(this)}>
                     <div className="form-group">
                         <div className="row">
                           <div className="col">

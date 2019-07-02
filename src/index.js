@@ -5,5 +5,14 @@ import App from './App';
 import 'typeface-roboto';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import postReducer from './components/reducers/postReducers';
+
+const store = createStore(postReducer);
+
+ReactDOM.render(
+    <Provider store={store}>
+    <App />
+    </Provider>, document.getElementById('root'));
 registerServiceWorker();
