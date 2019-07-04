@@ -3,7 +3,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 
 // data schemas for mongodb database
@@ -106,16 +105,15 @@ app.post('/api/addJob', function(req, res) {
   var { title, descr, deadline, amount, skillList, author, location, category } = req.body;
   const theJob = new Job({ title, descr, deadline, amount, skillList, author, location, category })
 
-  console.log(theJob)
   // saving the job into the database
   theJob.save(function(err) {
     if (err) {
       console.log(err);
-      res.status(500).send("Error registering new user please try again.");
+      res.status(500).send("Error registering new job please try again.");
     } else {
-      console.log('Successfully created user')
       res.status(200).send("Success");
     }
+  });
 });
 
 /*
@@ -123,13 +121,49 @@ app.post('/api/addJob', function(req, res) {
   Type: GET
   Description: getting all the jobs data from db
 */
-
+app.get('/api/data', function (req, res) {
+  Job.find(function (err, job) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else {
+      // sending all the jobs fetch from the database
+      res.status(200).send(job);
+    }
+  });
+});
 /*
   Route: /api/data/filter
   Type: POST
   Description: filtering through data in database
 */
-
+app.post('/api/data/filter', function (req, res) {
+  var { category, location } = req.body;
+  Job.find({ category: category }, function (err, job) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else {
+      // sending all the jobs fetch from the database
+      res.status(200).send(job);
+    }
+  });
+});
+/*
+  Route: /api/data/id
+  Type: POST
+  Description: get details about job
+*/
+app.post('/api/data/id', function (req, res) {
+  console.log('got into route')
+  var  jobId = req.body.id;
+  console.log(jobId)
+  Job.findOne({ _id: jobId }, function (err, job) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else {
+      // send details about job
+      res.status(200).send(job);
+    }
+  });
 });
 
 // listening on this port

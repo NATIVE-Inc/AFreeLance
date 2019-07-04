@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -43,6 +44,9 @@ class PostJob extends Component {
 
   addJob(e){
     e.preventDefault()
+
+    // get the users infromation
+    const token = this.props.theState.token;
     var url = 'http://127.0.0.1:5000/api/addJob';
     axios.post(url, {
       title: this.refs.title.value,
@@ -50,8 +54,8 @@ class PostJob extends Component {
       deadline: this.state.deadline,
       amount: this.refs.amount.value,
       skillList: this.state.skillList,
-      author: this.state.author,
-      location: this.state.location,
+      author: token.first_name + " " + token.last_name,
+      location: token.location,
       category: this.refs.category.value
     })
     .then((res) => {
@@ -60,7 +64,6 @@ class PostJob extends Component {
       }
     })
   };
-
   render() {
     const skillset = this.state.skills.map((item, index) =>{
       return(
@@ -120,5 +123,10 @@ class PostJob extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    theState: state
+  }
+}
 
-export default PostJob;
+export default connect(mapStateToProps)(PostJob);

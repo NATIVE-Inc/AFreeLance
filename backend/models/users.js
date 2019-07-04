@@ -2,7 +2,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-// this will be our data base's data structure 
+// this will be our data base's data structure
 const User = new Schema(
   {
     id: Number,
@@ -10,6 +10,8 @@ const User = new Schema(
     last_name: String,
     email: String,
     password: String,
+    location: String,
+    userSkills: Array,
   },
   { timestamps: true }
 );

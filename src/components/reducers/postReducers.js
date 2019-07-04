@@ -1,9 +1,9 @@
-const postReducer = (state = { isAuthenticated: false} , action ) => {
+const postReducer = (state = { isAuthenticated: false, token: null} , action ) => {
     switch(action.type) {
         case 'LOGIN':
             return {isAuthenticated:true, token:action.data};
         case 'LOGOUT':
-            return {isAuthenticated:false, token:null};
+            return { isAuthenticated: false, token: null };
         default:
             return state;
     }

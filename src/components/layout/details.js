@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { withRouter } from 'react-router-dom';
+import _ from 'lodash';
 
 class Work extends Component {
   constructor() {
@@ -9,8 +11,8 @@ class Work extends Component {
       };
   }
 
-  getDataId(Id){
-    var url = 'http://127.0.0.1:3210/data/id';
+  getDataId(Id) {
+    var url = 'http://127.0.0.1:5000/api/data/id';
     axios.post(url, {
       id: Id,
     })
@@ -20,8 +22,15 @@ class Work extends Component {
         workInfo: res.data,
       })
     })
+    console.log(this.state.workInfo);
   };
 
+  componentDidMount() {
+
+    // get the job id and pass it to function to fetch database
+    var jobId = this.props.location.state.jobId;
+    this.getDataId(jobId);
+  }
 
   render() {
     const workInfo = this.state.workInfo.map((item, index)=>{
@@ -69,5 +78,6 @@ class Work extends Component {
           );
   }
 }
+
 
 export default Work;

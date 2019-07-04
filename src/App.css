@@ -90,6 +90,9 @@ ul {
 html {
   height: 100%;
 }
+.main-container {
+  background-color: #f0f0f0;
+}
 
 body, #root, .holder, .sidenav {
   height: inherit;
@@ -348,7 +351,7 @@ select.form-control{
   height: 2.4em;
   line-height: 1.2em;
   opacity: 0.5;
-}  
+}
 .card-img {
   object-fit: cover;
 }
