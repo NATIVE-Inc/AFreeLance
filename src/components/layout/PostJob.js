@@ -55,6 +55,7 @@ class PostJob extends Component {
       amount: this.refs.amount.value,
       skillList: this.state.skillList,
       author: token.first_name + " " + token.last_name,
+      author_Id: token._id,
       location: token.location,
       category: this.refs.category.value
     })

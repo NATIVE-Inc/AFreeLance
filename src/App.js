@@ -9,6 +9,7 @@ import Landing from './components/layout/Landing';
 import Work from './components/layout/Work';
 import Login from './components/layout/Login';
 import SignUp from './components/layout/SignUp';
+
 import PostJob from './components/layout/PostJob';
 import Details from './components/layout/details';
 

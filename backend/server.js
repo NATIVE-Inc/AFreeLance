@@ -1,4 +1,3 @@
-const localStorage = require('localStorage');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -102,8 +101,8 @@ app.post('/api/login', function(req, res) {
   Description: adding jobs to the database
 */
 app.post('/api/addJob', function(req, res) {
-  var { title, descr, deadline, amount, skillList, author, location, category } = req.body;
-  const theJob = new Job({ title, descr, deadline, amount, skillList, author, location, category })
+  var { title, descr, deadline, amount, skillList, author, author_Id, location, category } = req.body;
+  const theJob = new Job({ title, descr, deadline, amount, skillList, author, author_Id, location, category })
 
   // saving the job into the database
   theJob.save(function(err) {
@@ -153,15 +152,22 @@ app.post('/api/data/filter', function (req, res) {
   Description: get details about job
 */
 app.post('/api/data/id', function (req, res) {
-  console.log('got into route')
   var  jobId = req.body.id;
-  console.log(jobId)
   Job.findOne({ _id: jobId }, function (err, job) {
     if (err) {
       res.status(401).send('Internal Server Error')
     } else {
-      // send details about job
-      res.status(200).send(job);
+      // after getting the job, find the details of the user who posted it
+      User.findOne({ _id: job.author_Id }, function (err, userJob) {
+        if (err) {
+          res.status(401).send('Internal Server Error')
+        } else {
+          // details of user who posted job is added to job
+          // send details about job
+          job['author_Info'] = userJob;
+          res.status(200).send(job);
+        }
+      })
     }
   });
 });

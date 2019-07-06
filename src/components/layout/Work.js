@@ -32,7 +32,7 @@ class Work extends Component {
   renderJobs() {
     return _.map(this.state.work, post => {
       return (
-        <div className="row card-work" id={post._id} onClick={this.goToDetails.bind(this)} >
+        <div className="row card-work" key={post._id} id={post._id} onClick={this.goToDetails.bind(this)} >
         <img className="card-img col-md-2" src={require('../images/blog/01.jpg')}  alt="the_image"/>
         <div className="card-block col-md-8">
           <div className="card-title paddingClr">{post.title}</div>
@@ -50,11 +50,12 @@ class Work extends Component {
 
   // route to the details of the post
   goToDetails(e) {
-    let currentId = e.currentTarget.id; // this is the id of post clicked
-    this.props.history.push({
-      pathname: '/details',
-      state: { jobId: currentId },
+    var data =  e.currentTarget.id; // this is the id of post clicked
+    this.props.dispatch({
+      type: 'JOB_DETAIL',
+      data
     })
+    this.props.history.push('/details')
   }
 
   handleChange(e){

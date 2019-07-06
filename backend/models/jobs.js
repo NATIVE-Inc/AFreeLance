@@ -12,8 +12,10 @@ const Job = new Schema(
     amount: String,
     skillList: Array,
     author: String,
+    author_Id: String,
     location: String,
     category: String,
+    author_Info: {},
   },
   { timestamps: true }
 );
