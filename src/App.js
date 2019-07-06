@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import {
   Route,
-  HashRouter
+  HashRouter,
+  Redirect,
+
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
@@ -21,20 +24,33 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 // the native page imports
 
+// these are private routes which are only accesible when the user sign in
+const PrivateRoute = ({ component: Component, ...rest, isAuthenticated }) => (
+  <Route {...rest} render={(props) => (
+    isAuthenticated ?
+      <Component {...props} />
+      : <Redirect to={{
+        pathname: '/login',
+        state: { from: props.location }
+      }} />
+  )} />
+)
 
 
 class App extends Component {
   render() {
+    const isAuth = this.props.theState.isAuthenticated;
     return (
     <HashRouter>
-      <div className="main-container">
+        <div className="main-container">
+          {console.log}
         <Navbar/>
         <Route exact path="/" component={Landing}/>
-        <Route path="/work" component={Work}/>
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUp}/>
-        <Route path="/postjob" component={PostJob}/>
-        <Route path="/details" component={Details}/>
+        <PrivateRoute path="/work" component={Work} isAuthenticated={isAuth} />
+        <PrivateRoute path="/postjob" component={PostJob} isAuthenticated={isAuth} />
+        <PrivateRoute path="/details" component={Details} isAuthenticated={isAuth} />
         <Footer />
       </div>
     </HashRouter>
@@ -42,5 +58,10 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    theState: state
+  }
+}
 
-export default App;
+export default connect(mapStateToProps)(App);

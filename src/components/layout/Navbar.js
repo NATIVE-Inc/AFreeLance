@@ -11,7 +11,6 @@ class Navbar extends Component {
     this.props.dispatch({
       type: 'LOGOUT'
     })
-    console.log('logged out')
     // return to homepage whenever user logs out
     history.push('/')
   }

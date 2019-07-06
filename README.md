@@ -3,11 +3,11 @@
 
 ### Documentation
 #### What is AfreeLancer
-Hire
+#### Hire
 Platform to find expertise on projects
 Find professionals who can implement your projects
 
-Work
+#### Work
 Work from Home
 Make commision by providing expertise to projects
 
@@ -16,7 +16,20 @@ Create Websites
 Create Logos
 Do Assignments
 
-
+### To- do
+- [x] login system
+- [x] post page
+- [] profile page
+- [] hire page
+- [x] if else in the redirect not working
+- [x] work page
+- [] page transitions
+- [] ajax verifications
+- [] protect routes with authentication
+- [x] counting number of post retrieved
+- [] place warnings for when db is down
+- [x] reverse order of feed
+- [] manipulating date
 
 #### Use Cases
 As Admin
@@ -82,6 +95,7 @@ Run backend _in another terminal_
     └───package.json
     └───README.md
 
+
 ### Database
 **Mongodb** is used in this application
 Here are some useful command for _mongodb database_. You can find more online
@@ -123,20 +137,3 @@ This is used to keep track of a global state for the whole application
 `/src/components/reducers/postReducers.js `
 - 'LOGIN':   return {isAuthenticated:true,};
 - 'LOGOUT': return {isAuthenticated:false, token:null};
-
-
-### To- do
-- [x] login system
-- [x] post page
-- [] profile page
-- [] hire page
-- [x] if else in the redirect not working
-- [x] work page
-- [] page transitions
-- [] ajax verifications
-- [] protect routes with authentication
-- [] counting number of post retrieved
-- [] place warnings for when db is down
-- [] reverse order of feed
-- [] count number of posts
-

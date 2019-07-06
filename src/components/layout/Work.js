@@ -22,7 +22,7 @@ class Work extends Component {
     })
     .then((res) => {
       this.setState({
-        work: res.data,
+        work: res.data, // puts all posts in state
       });
     })
     // rendering the filtered jobs
@@ -30,7 +30,8 @@ class Work extends Component {
   }
 
   renderJobs() {
-    return _.map(this.state.work, post => {
+    // the list is rendered in reverse order
+    return _.map(this.state.work.reverse(), post => {
       return (
         <div className="row card-work" key={post._id} id={post._id} onClick={this.goToDetails.bind(this)} >
         <img className="card-img col-md-2" src={require('../images/blog/01.jpg')}  alt="the_image"/>
@@ -104,7 +105,7 @@ class Work extends Component {
                   </div>
                   <div className="form-group col-md-9 section-container">
                     <div className="col-md-12 theShadow">
-                <div><br /><h5>24 results</h5></div>
+                <div><br /><h5>{this.state.work.length} Posts</h5></div>
                     {this.renderJobs()}
                     </div>
                   </div>
