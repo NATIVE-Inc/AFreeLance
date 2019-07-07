@@ -84,7 +84,7 @@ class Work extends Component {
                 <div className="row">
                   <div className="col-md-3 section-container">
                   <div className="form-group theShadow sidebar">
-              <label> Filters </label>
+                    <label> Filters </label>
                     <fieldset className="form-group">
                       <select className="form-control"  ref="category" onChange={this.filterJobs.bind(this)}>
                         <option value='uncategorized'>Category</option>
@@ -105,7 +105,7 @@ class Work extends Component {
                   </div>
                   <div className="form-group col-md-9 section-container">
                     <div className="col-md-12 theShadow">
-                <div><br /><h5>{this.state.work.length} Posts</h5></div>
+                    <div><br /><h5>{this.state.work.length} Posts</h5></div>
                     {this.renderJobs()}
                     </div>
                   </div>

@@ -25,7 +25,7 @@ Do Assignments
 - [x] work page
 - [] page transitions
 - [] ajax verifications
-- [] protect routes with authentication
+- [x] protect routes with authentication
 - [x] counting number of post retrieved
 - [] place warnings for when db is down
 - [x] reverse order of feed

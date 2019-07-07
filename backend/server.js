@@ -171,6 +171,21 @@ app.post('/api/data/id', function (req, res) {
     }
   });
 });
+/*
+  Route: /api/freelancer
+  Type: GET
+  Description: get all the freelancers
+*/
+app.get('/api/freelancer', function (req, res) {
+  User.find(function (err, freelancers) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else {
+      console.log(freelancers)
+      res.status(200).send(freelancers);
+    }
+  });
+});
 
 // listening on this port
 const PORT = process.env.PORT || 5000;
