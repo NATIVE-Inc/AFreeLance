@@ -19,6 +19,11 @@ class Work extends Component {
       };
   }
 
+  // apply for a job
+  apply() {
+
+  }
+
   componentDidMount() {
 
     // get the job id and pass it to function to fetch database

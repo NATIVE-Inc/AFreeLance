@@ -9,6 +9,11 @@ const postReducer = (state = { isAuthenticated: false, token: null} , action ) =
                 ...state,
                 jobDetail: action.data
             };
+        case 'PROFILE_DETAIL':
+            return {
+                ...state,
+                profileId: action.data
+            };
         default:
             return state;
     }

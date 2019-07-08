@@ -110,6 +110,16 @@ app.post('/api/addJob', function(req, res) {
       console.log(err);
       res.status(500).send("Error registering new job please try again.");
     } else {
+      console.log(theJob._id)
+      // put the theJob._id into my_jobs array of user
+      User.updateOne({ _id: author_Id }, { $set: { my_jobs: [theJob._id] } }, function (err) {
+        if (err) {
+          console.log(err);
+          console.log('failed to update my_jobs');
+        } else {
+          console.log('successfully updated my_jobs');
+        }
+      });
       res.status(200).send("Success");
     }
   });
@@ -183,6 +193,22 @@ app.get('/api/freelancer', function (req, res) {
     } else {
       console.log(freelancers)
       res.status(200).send(freelancers);
+    }
+  });
+});
+/*
+  Route: /api/freelancer/id
+  Type: POST
+  Description: get information about freelancer
+*/
+app.post('/api/freelancer/id', function (req, res) {
+  var id = req.body.id;
+  User.find({ _id: id}, function (err, freelancer) {
+    if (err) {
+      res.status(401).send('Internal Server Error')
+    } else {
+      console.log(freelancer)
+      res.status(200).send(freelancer);
     }
   });
 });

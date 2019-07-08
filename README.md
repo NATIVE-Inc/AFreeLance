@@ -19,8 +19,8 @@ Do Assignments
 ### To- do
 - [x] login system
 - [x] post page
-- [] profile page
-- [] hire page
+- [X] profile page
+- [X] hire page
 - [x] if else in the redirect not working
 - [x] work page
 - [] page transitions
@@ -30,6 +30,8 @@ Do Assignments
 - [] place warnings for when db is down
 - [x] reverse order of feed
 - [] manipulating date
+- [] adding value to array in mongodb
+- [] proposal validation
 
 #### Use Cases
 As Admin

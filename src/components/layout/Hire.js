@@ -22,7 +22,7 @@ class Hire extends Component {
   render() {
     const FreeLancersg = this.state.freeLancer.map((item, index)=>{
         return (
-            <div className="card col-md-3 paddingClr hire-card" key={item._id} id={item._id}>
+            <div className="card paddingClr hire-card" key={item._id} id={item._id}>
                 <img className="card-img"  src={require('../images/blog/01.jpg')}  alt="the_image"/>
                 <div className="card-block col-md-8">
                 <div className="card-title paddingClr">{item.first_name + " " + item.last_name}</div>

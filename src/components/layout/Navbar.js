@@ -14,6 +14,15 @@ class Navbar extends Component {
     // return to homepage whenever user logs out
     history.push('/')
   }
+  // route to profile page
+  profile = (e) => {
+    var data = e.currentTarget.id;
+    this.props.dispatch({
+      type: 'PROFILE_DETAIL',
+      data
+    })
+    history.push('/profile')
+  }
 
   render() {
       if (this.props.theState.isAuthenticated){
@@ -39,11 +48,16 @@ class Navbar extends Component {
                     How it works
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink className="nav-link" to="/work">
-                    Work
-                  </NavLink>
-                </li>
+                  <li>
+                    <NavLink className="nav-link" to="/hire">
+                      Hire
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink className="nav-link" to="/work">
+                      Work
+                    </NavLink>
+                  </li>
                 <li className="nav-item">
                   <NavLink className="nav-link btn btn-primary " to="/postjob" >
                     Post a Job
@@ -52,7 +66,7 @@ class Navbar extends Component {
                 <li className="nav-item nav-info">
                   <img className="nav-info-img" alt="the_image" src={require('../images/blog/01.jpg')}/>
                     <div className="nav-info-details">
-                    <span ref='username'><b>{this.props.theState.token.first_name} {this.props.theState.token.last_name}</b></span><br/>
+                    <span ref='username' id={this.props.theState.token._id} onClick={this.profile}><b>{this.props.theState.token.first_name} {this.props.theState.token.last_name}</b></span><br/>
                     <span className="bal" onClick={this.logout}>0.00 FCFA</span>
                   </div>
                 </li>

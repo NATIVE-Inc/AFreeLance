@@ -12,6 +12,7 @@ const User = new Schema(
     password: String,
     location: String,
     userSkills: Array,
+    my_jobs: Array,
   },
   { timestamps: true }
 );
