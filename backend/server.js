@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongo_uri = 'mongodb://localhost/afreelancer';
+const mongo_uri = 'mongodb+srv://root:toor>@afreelance-lbpyh.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
   if (err) {
