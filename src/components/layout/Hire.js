@@ -20,7 +20,7 @@ class Hire extends Component {
   }
 
   render() {
-    const dataMySQL = this.state.freeLancer.map((item, index)=>{
+    const FreeLancersg = this.state.freeLancer.map((item, index)=>{
         return (
             <div className="card col-md-3 paddingClr hire-card" key={item._id} id={item._id}>
                 <img className="card-img"  src={require('../images/blog/01.jpg')}  alt="the_image"/>
@@ -36,7 +36,7 @@ class Hire extends Component {
 
         <div className="container">
             <div className="row  col-md-12 ">
-                    { dataMySQL }
+                    { FreeLancersg }
                 </div>
             </div>
 
