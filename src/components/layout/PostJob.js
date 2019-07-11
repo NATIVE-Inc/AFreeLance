@@ -47,7 +47,7 @@ class PostJob extends Component {
 
     // get the users infromation
     const token = this.props.theState.token;
-    var url = 'http://127.0.0.1:5000/api/addJob';
+    var url = 'https://afreelancer-api.herokuapp.com/api/addJob';
     axios.post(url, {
       title: this.refs.title.value,
       descr: this.refs.descr.value,

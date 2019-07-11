@@ -25,7 +25,7 @@ class SignUp extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://localhost:5000/api/signup';
+    var url = 'https://afreelancer-api.herokuapp.com/api/signup';
     axios.post(url, {
       first_name: this.state.first_name,
       last_name: this.state.last_name,

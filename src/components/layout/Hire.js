@@ -10,7 +10,7 @@ class Hire extends Component {
   }
 
   componentDidMount() {
-    var url = 'http://127.0.0.1:5000/api/freelancer';
+    var url = 'https://afreelancer-api.herokuapp.com/api/freelancer';
     axios.get(url)
     .then((res) => {
       this.setState({

@@ -15,7 +15,7 @@ class Work extends Component {
 
   filterJobs(e) {
     e.preventDefault()
-    var url = 'http://127.0.0.1:5000/api/data/filter';
+    var url = 'https://afreelancer-api.herokuapp.com/api/data/filter';
     axios.post(url, {
       category: this.refs.category.value,
       location: this.refs.location.value
@@ -68,7 +68,7 @@ class Work extends Component {
   }
 
   componentDidMount() {
-    var url = 'http://127.0.0.1:5000/api/data';
+    var url = 'https://afreelancer-api.herokuapp.com/api/data';
     axios.get(url)
     .then((res) => {
       this.setState({

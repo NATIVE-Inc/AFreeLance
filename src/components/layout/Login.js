@@ -22,7 +22,7 @@ class Login extends Component {
 
   handleSubmit(event){
     event.preventDefault()
-    var url = 'http://localhost:5000/api/login';
+    var url = 'https://afreelancer-api.herokuapp.com/api/login';
     axios.post(url, {
       email: this.state.email,
       password: this.state.password,

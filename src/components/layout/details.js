@@ -24,7 +24,7 @@ class Work extends Component {
     // get the job id and pass it to function to fetch database
     var jobId = this.props.theState.jobDetail;
 
-    var url = 'http://127.0.0.1:5000/api/data/id';
+    var url = 'https://afreelancer-api.herokuapp.com/api/data/id';
     axios.post(url, {
       id: jobId,
     })
