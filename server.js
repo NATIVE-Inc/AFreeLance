@@ -20,7 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongo_uri = 'mongodb://localhost/afreelancer';
+// the uri is for mlab which is an online mongo database
+const mongo_uri = 'mongodb+srv://root:toor@afreelancerdb-iqjck.mongodb.net/test?retryWrites=true&w=majority';
 
 mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
   if (err) {
