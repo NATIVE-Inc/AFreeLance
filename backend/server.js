@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const mongo_uri = 'mongodb://localhost/afreelancer';
+const mongo_uri = 'mongodb://localhost/afreelancer'; // link for local db
 
 mongoose.connect(mongo_uri, { useNewUrlParser: true }, function(err) {
   if (err) {
