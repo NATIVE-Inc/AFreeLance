@@ -68,6 +68,7 @@ class SignUp extends Component {
                       <small className="text-muted">Your email will not be shared with any third party.</small>
                     </div>
                     <div className="form-group">
+                      <label htmlFor="exampleFormControlInput1">Password &nbsp;&nbsp;&nbsp;</label>
                       <input name="password" type="password" className="form-control" id="exampleFormControlInput1"  onChange={this.handleChange.bind(this)} required/>
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>

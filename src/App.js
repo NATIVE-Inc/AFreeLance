@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Landing from './components/layout/Landing';
+import Profile from './components/layout/Profile';
 import Work from './components/layout/Work';
 import Hire from './components/layout/Hire';
 import Login from './components/layout/Login';
@@ -50,6 +51,7 @@ class App extends Component {
         <Route path="/login" component={Login}/>
         <Route path="/signup" component={SignUp}/>
         <Route path="/hire" component={Hire}/>
+        <Route path="/profile" component={Profile}/>
         <PrivateRoute path="/work" component={Work} isAuthenticated={isAuth} />
         <PrivateRoute path="/postjob" component={PostJob} isAuthenticated={isAuth} />
         <PrivateRoute path="/details" component={Details} isAuthenticated={isAuth} />
