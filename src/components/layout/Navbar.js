@@ -58,6 +58,16 @@ class Navbar extends Component {
                       Work
                     </NavLink>
                   </li>
+                  
+                  { this.props.theState.token.email === 'admin@afreelancer.com' ?
+                        <li>
+                          <NavLink className="nav-link" to="/backend">
+                            Backend
+                          </NavLink>
+                        </li>
+                      : 
+                      console.log('not admin')
+                  } 
                 <li className="nav-item">
                   <NavLink className="nav-link btn btn-primary " to="/postjob" >
                     Post a Job

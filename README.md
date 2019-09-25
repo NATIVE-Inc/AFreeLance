@@ -12,9 +12,9 @@ Work from Home
 Make commision by providing expertise to projects
 
 Examples
-Create Websites
-Create Logos
-Do Assignments
+    Create Websites
+    Create Logos
+    Do Assignments
 
 ### To- do
 - [x] login system
@@ -32,6 +32,9 @@ Do Assignments
 - [] manipulating date
 - [] adding value to array in mongodb
 - [] proposal validation
+- [] animations 
+    loading feedback for login / sign up 
+    push notifications 
 
 #### Use Cases
 As Admin
@@ -70,13 +73,11 @@ Make sure you have [Node](www.google.com) and [Git](www.github.com) installed.
 - cd `afreelancer/backend`
 - `npm install`
 
-Run frontend
+#### Run frontend
 - cd `afreelancer`
 - npm start
 
-This will start the frontend
-
-Run backend _in another terminal_
+#### Run backend _in another terminal_
 - cd `afreelancer/backend`
 - nodemon server.js
 
@@ -103,8 +104,8 @@ Run backend _in another terminal_
 Here are some useful command for _mongodb database_. You can find more online
 **NoSql** databases
 
+#### Commands MongoDB
 ```
-Mongodb notes
 show dbs
     show databases
 use <name>

@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
+import DatePicker from 'react-date-picker'
 
-
-import "react-datepicker/dist/react-datepicker.css";
 let skillList1 =  [];
 
 class PostJob extends Component {
+
+    /* list of all input fields
+        Title 
+        description 
+        category 
+        Town 
+        amount
+        skills 
+        deadline (to do)
+        
+        -------------------to be gotten from credentials 
+        author
+        author_Id
+        location
+    */
     constructor(props) {
       super(props);
       this.state = {
@@ -14,23 +28,42 @@ class PostJob extends Component {
       }
     }
 
-    handleChange(e){
-      const name = e.target.name;
-      const value = e.target.value;
-      this.setState({
-        [name]: value
-      })
-    }
+  /* 
+    name: handleChange
+    descr: update values of input fields in the state onchange
+  */
 
+  handleChange(e){
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({
+      [name]: value
+    })
+  }
+
+
+  /* 
+    name: skillSet
+    descr: update value of skills selected in the state 
+  */
   skillSet(event) {
     event.preventDefault()
-    let currentColor = event.target.attributes['data-color'].value;
-    let newColor = currentColor === "#FFF" ? "#ACCEEC" : "#FFF";
-    event.target.style.backgroundColor = newColor;
-    event.target.style.transition = '0.2s ease-in-out';
-    event.target.style.border = '1px solid white';
-    event.target.setAttribute('data-color', newColor);
+    
+    
+    {/* makes the button active and changes theme
+        toggles the class active
+    */}
+    let theCurrentClass = event.target.className;
+    var j = theCurrentClass.indexOf('active')
+    if( j === -1)
+      event.target.className += ' active';
+    else 
+      event.target.className = 'btn btn-outline-primary skills-btn';
 
+
+    {/* adding the skill to the list of skills in the sttate
+        checks first to confrim the presence of the skill in thelist
+    */}
     let thevalue = event.target.name;
     var i = skillList1.indexOf(thevalue)
     if (i === -1)
@@ -42,6 +75,11 @@ class PostJob extends Component {
 
   }
 
+
+  /* 
+    name: addJob
+    descr: post details of job in database 
+  */
   addJob(e){
     e.preventDefault()
 
@@ -68,39 +106,57 @@ class PostJob extends Component {
   render() {
     const skillset = this.state.skills.map((item, index) =>{
       return(
-        <button className="btn btn-default skills-bt" name={item} data-color="#FFF" onClick={(e) => {this.skillSet(e)}}>{item}</button>
+        <button className="btn btn-outline-primary skills-btn" name={item} data-color="#FFF" onClick={(e) => {this.skillSet(e)}}>{item}</button>
       );
     })
     return (
           <div className="container">
-              <div className="col-md-12 text-center">
-                <h1 className="display-3 mb-4">Post A Job</h1>
+              <div className="col-md-12">
+                <h4 className="mb-3">AFreeLancer</h4>
+                <h1 className="mb-0">Tell us what you need done</h1>
+                <p > Contact skilled freelancers within minutes. View profiles, ratings, portfolios and chat with them. Pay the freelancer only when you are 100% satisfied with their work. </p>
+                <br/>
                 <form className="theForm" onSubmit={this.addJob.bind(this)}>
                   <fieldset className="form-group">
-                    <label>Title</label>
-                    <input type="text" ref="title" onChange={this.handleChange.bind(this)} className="form-control" placeholder="Title" required />
-                    <small className="text-muted">This is some help text.</small>
+                    <h4 className="display-6"> Project Name</h4>
+                    <input type="text" ref="title" onChange={this.handleChange.bind(this)} className="form-control" placeholder="e.g Build me a Website" required />
                   </fieldset>
                   <fieldset className="form-group">
-                    <label>Description</label>
-                    <textarea className="form-control" rows="3" placeholder="Enter a decription of your job" ref="descr" onChange={this.handleChange.bind(this)}></textarea>
+                    <h4  className="display-6">Tell us more about your project</h4>
+                    <small> Start with a bit about yourself or your business, and include an overview of what you need done. </small>
+                    <textarea className="form-control" rows="7" placeholder="Describe your project here" ref="descr" onChange={this.handleChange.bind(this)}></textarea>
                   </fieldset>
                   <fieldset className="form-group">
                     <div className="form-group">
                       <div className="row">
                         <div className="col">
-                          <label>Category</label>
+                          <h4 className="display-6">Category</h4>
+
+                          {/* ToDo: list of categories generated from database */}
                           <select className="col browser-default custom-select" ref="category" onChange={this.handleChange.bind(this)}>
-                            <option value='uncategorized'>Category</option>
+                            <option value='uncategorized' disabledselected>Select Category</option>
                             <option>Agriculture</option>
                             <option>Information Technology</option>
                             <option>Real Estate</option>
                           </select>
                         </div>
+
                         <div className="col">
-                          <label>Amount</label>
+                          <h4 className="display-6">Town</h4>
+
+                          {/* ToDo: list of towns generated from database */}
+                          <select className="col browser-default custom-select" ref="town" onChange={this.handleChange.bind(this)}>
+                            <option value='uncategorized' selected>Select Town</option>
+                            <option>Yaounde</option>
+                            <option>Douala</option>
+                            <option>Buea</option>
+                          </select>
+                        </div>
+
+                        <div className="col">
+                          <h4 className="display-6">Amount</h4>
                           <div className="input-group mb-3">
-                            <input type="text" ref="amount"  onChange={this.handleChange.bind(this)} className="form-control" placeholder="Amount to pay" aria-label="Amount to pay" aria-describedby="basic-addon2"/>
+                            <input type="text" ref="amount"  onChange={this.handleChange.bind(this)} className="form-control" placeholder="0.00" type="number" aria-describedby="basic-addon2"/>
                             <div className="input-group-append">
                               <span className="input-group-text" id="basic-addon2">FCFA</span>
                             </div>
@@ -110,11 +166,12 @@ class PostJob extends Component {
                     </div>
                   </fieldset>
                   <fieldset className="form-group">
-                    <label>Skills</label>
+                    <h4 className="display-6">Skills</h4>
+                    <small> Which skills are you looking for? </small>
                     <div className="skillset">
                       {skillset}
                     </div>
-                  </fieldset>
+                  </fieldset><br/>
                   <fieldset>
                   <button type="submit" className="btn btn-primary floatRight" >Post</button>
                   </fieldset>

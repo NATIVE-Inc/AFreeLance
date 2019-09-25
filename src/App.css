@@ -276,9 +276,9 @@ select.form-control{
 
 
 .theForm {
-  width: 35%;
-  margin: auto;
   text-align: left;
+  background-color: white;
+  padding: 5%;
 }
 
 .formField {
@@ -290,7 +290,12 @@ select.form-control{
 }
 
 .display-3 {
-  font-size: 3.4rem !important;
+  font-size: 2.4rem !important;
+  text-align: left;
+}
+
+.display-6{
+  font-size: 1.2rem !important;
 }
 
 .paddingClr {
@@ -302,8 +307,13 @@ select.form-control{
   padding: 0.8rem;
 }
 
+.skills-btn {
+  margin-right: 10px;
+}
+
 .skills-btn .active {
-    background-color: #007bff;
+    background-color: rgb(0, 123, 255);
+    color: white ;
     transition: 1s ease-in-out;
     border: 1px solid white;
 }
@@ -374,6 +384,10 @@ select.form-control{
 .navbar-brand {
   text-decoration: none;
 }
+
+.content-brand {
+  text-align: left;
+}
 .navbar-expand-sm .navbar-nav .nav-link {
   text-decoration: none;
   margin: 0 !important;
@@ -407,6 +421,10 @@ select.form-control{
 .nav-info.details {
   float: left;
 
+}
+
+.floatRight {
+  float: right;
 }
 
 .ml-auto {

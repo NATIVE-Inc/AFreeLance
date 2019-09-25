@@ -17,10 +17,11 @@ import SignUp from './components/layout/SignUp';
 
 import PostJob from './components/layout/PostJob';
 import Details from './components/layout/details';
+import Backend from './components/layout/backend';
 
 
 import './App.css';
-
+ 
 // importing bootstrap
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -38,10 +39,23 @@ const PrivateRoute = ({ component: Component, ...rest, isAuthenticated }) => (
   )} />
 )
 
+// these are private routes which are only accesible by the administrator
+const AdminRoute = ({ component: Component, ...rest, token }) => (
+  <Route {...rest} render={(props) => (
+    token.email === 'admin@afreelancer.com' ?
+      <Component {...props} />
+      : <Redirect to={{
+        pathname: '/',
+        state: { from: props.location }
+      }} />
+  )} />
+)
+
 
 class App extends Component {
   render() {
     const isAuth = this.props.theState.isAuthenticated;
+    const token  = this.props.theState.token;
     return (
     <HashRouter>
         <div className="main-container">
@@ -53,8 +67,14 @@ class App extends Component {
         <Route path="/hire" component={Hire}/>
         <Route path="/profile" component={Profile}/>
         <PrivateRoute path="/work" component={Work} isAuthenticated={isAuth} />
+
+        <Route path="/postjob" component={PostJob}/>
+        {/*  
         <PrivateRoute path="/postjob" component={PostJob} isAuthenticated={isAuth} />
+        */}
         <PrivateRoute path="/details" component={Details} isAuthenticated={isAuth} />
+        
+        <AdminRoute path="/backend" component={Backend} token={token} />
         <Footer />
       </div>
     </HashRouter>
